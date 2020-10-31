@@ -71,7 +71,9 @@ public class Computer : MonoBehaviour
     {
         StreamReader reader = new StreamReader($"Assets/Resources/{fileName}");
         string prog = reader.ReadToEnd();
-        return JsonUtility.FromJson<Program>(prog);
+        Program program = JsonUtility.FromJson<Program>(prog);
+        print($"Done loading program: {fileName}");
+        return program;
     }
 
     IEnumerator RunProgram(Program program)
