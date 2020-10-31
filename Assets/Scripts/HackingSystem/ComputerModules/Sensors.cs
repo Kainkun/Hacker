@@ -34,7 +34,6 @@ public class Sensors : ComputerModule
         Vector2 forward = transform.right;
         Vector2 directionTo = (position - (Vector2)transform.position);
         float angle = kMath.AngleBetween(forward, directionTo);
-        //print(angle);
         if (angle <= visionAngle / 2)
             return true;
         else

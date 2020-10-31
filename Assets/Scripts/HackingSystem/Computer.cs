@@ -96,7 +96,6 @@ public class Computer : MonoBehaviour
         program.AddCommand<IfSee>(sight);
         program.AddCommand<MoveForward>(move1);
         program.AddCommand<MoveBack>(move2);
-
         return program;
     }
 

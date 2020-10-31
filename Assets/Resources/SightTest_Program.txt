@@ -1,6 +1,6 @@
 {
     "parentComputer": {
-        "instanceID": 15406
+        "instanceID": 24242
     },
     "name": "SightTest_Program",
     "commands": [
@@ -24,24 +24,10 @@
             },
             "data": {
                 "parentComputer": {
-                    "instanceID": 15406
+                    "instanceID": 24242
                 },
                 "parentProgram": {
-                    "parentComputer": {
-                        "instanceID": 15406
-                    },
-                    "name": "SightTest_Program",
-                    "commands": [
-                        {
-                            "id": 0
-                        },
-                        {
-                            "id": 1
-                        },
-                        {
-                            "id": 2
-                        }
-                    ]
+                    "id": 3
                 },
                 "nextCommands": [
                     {
@@ -62,24 +48,10 @@
             },
             "data": {
                 "parentComputer": {
-                    "instanceID": 15406
+                    "instanceID": 24242
                 },
                 "parentProgram": {
-                    "parentComputer": {
-                        "instanceID": 15406
-                    },
-                    "name": "SightTest_Program",
-                    "commands": [
-                        {
-                            "id": 0
-                        },
-                        {
-                            "id": 1
-                        },
-                        {
-                            "id": 2
-                        }
-                    ]
+                    "id": 3
                 },
                 "nextCommands": [
                     {
@@ -97,24 +69,10 @@
             },
             "data": {
                 "parentComputer": {
-                    "instanceID": 15406
+                    "instanceID": 24242
                 },
                 "parentProgram": {
-                    "parentComputer": {
-                        "instanceID": 15406
-                    },
-                    "name": "SightTest_Program",
-                    "commands": [
-                        {
-                            "id": 0
-                        },
-                        {
-                            "id": 1
-                        },
-                        {
-                            "id": 2
-                        }
-                    ]
+                    "id": 3
                 },
                 "nextCommands": [
                     {
@@ -125,6 +83,30 @@
             }
         },
         "00000003": {
+            "type": {
+                "class": "Program",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentComputer": {
+                    "instanceID": 24242
+                },
+                "name": "SightTest_Program",
+                "commands": [
+                    {
+                        "id": 0
+                    },
+                    {
+                        "id": 1
+                    },
+                    {
+                        "id": 2
+                    }
+                ]
+            }
+        },
+        "00000004": {
             "type": {
                 "class": "Terminus",
                 "ns": "UnityEngine.DMAT",
