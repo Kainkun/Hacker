@@ -30,7 +30,7 @@ public class Computer : MonoBehaviour
 
     private void Start()
     {
-        AddProgram(CreateTestProgramSight()); //create and add a test program. DONT USE programs.Add, it needs to handle parenting with AddProgram
+        AddProgram(CreateTestProgram()); //create and add a test program. DONT USE programs.Add, it needs to handle parenting with AddProgram
     }
 
     private void Update()
@@ -47,7 +47,7 @@ public class Computer : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.L))
         {
-            programs[0] = TxtToProgram("Test_Program.txt");
+            programs[0] = TxtToProgram("SightTest_Program.txt");
         }
     }
 

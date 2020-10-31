@@ -1,0 +1,136 @@
+{
+    "parentComputer": {
+        "instanceID": 15406
+    },
+    "name": "SightTest_Program",
+    "commands": [
+        {
+            "id": 0
+        },
+        {
+            "id": 1
+        },
+        {
+            "id": 2
+        }
+    ],
+    "references": {
+        "version": 1,
+        "00000000": {
+            "type": {
+                "class": "IfSee",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentComputer": {
+                    "instanceID": 15406
+                },
+                "parentProgram": {
+                    "parentComputer": {
+                        "instanceID": 15406
+                    },
+                    "name": "SightTest_Program",
+                    "commands": [
+                        {
+                            "id": 0
+                        },
+                        {
+                            "id": 1
+                        },
+                        {
+                            "id": 2
+                        }
+                    ]
+                },
+                "nextCommands": [
+                    {
+                        "id": 0
+                    },
+                    {
+                        "id": 1
+                    }
+                ],
+                "tag": "Player"
+            }
+        },
+        "00000001": {
+            "type": {
+                "class": "MoveForward",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentComputer": {
+                    "instanceID": 15406
+                },
+                "parentProgram": {
+                    "parentComputer": {
+                        "instanceID": 15406
+                    },
+                    "name": "SightTest_Program",
+                    "commands": [
+                        {
+                            "id": 0
+                        },
+                        {
+                            "id": 1
+                        },
+                        {
+                            "id": 2
+                        }
+                    ]
+                },
+                "nextCommands": [
+                    {
+                        "id": 2
+                    }
+                ],
+                "distance": 1.0
+            }
+        },
+        "00000002": {
+            "type": {
+                "class": "MoveBack",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentComputer": {
+                    "instanceID": 15406
+                },
+                "parentProgram": {
+                    "parentComputer": {
+                        "instanceID": 15406
+                    },
+                    "name": "SightTest_Program",
+                    "commands": [
+                        {
+                            "id": 0
+                        },
+                        {
+                            "id": 1
+                        },
+                        {
+                            "id": 2
+                        }
+                    ]
+                },
+                "nextCommands": [
+                    {
+                        "id": 0
+                    }
+                ],
+                "distance": 1.0
+            }
+        },
+        "00000003": {
+            "type": {
+                "class": "Terminus",
+                "ns": "UnityEngine.DMAT",
+                "asm": "FAKE_ASM"
+            },
+            "data": {}
+        }
+    }
+}
