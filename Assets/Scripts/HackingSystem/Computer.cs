@@ -5,11 +5,32 @@ using System.IO;
 
 public class Computer : MonoBehaviour
 {
+    public float tickTime = 1;
     public List<Program> programs = new List<Program>(); //a computer has a list of programs it can run
+
+    //Modules
+    [HideInInspector]
+    public Movement movement;
+    [HideInInspector]
+    public Sensors sensors;
+
+    private void Awake()
+    {
+        AddModules();
+    }
+
+    void AddModules()
+    {
+        movement = GetComponent<Movement>();
+        sensors = GetComponent<Sensors>();
+
+        movement?.SetParentComputer(this);
+        sensors?.SetParentComputer(this);
+    }
 
     private void Start()
     {
-        AddProgram(CreateTestProgram()); //create and add a test program. DONT USE programs.Add, it needs to handle parenting with AddProgram
+        AddProgram(CreateTestProgramSight()); //create and add a test program. DONT USE programs.Add, it needs to handle parenting with AddProgram
     }
 
     private void Update()
@@ -58,6 +79,27 @@ public class Computer : MonoBehaviour
         return program;
     }
 
+    public Program CreateTestProgramSight()
+    {
+        Program program = new Program("SightTest_Program", this);
+
+        MoveForward move1 = new MoveForward();
+        MoveBack move2 = new MoveBack();
+        IfSee sight = new IfSee("Player");
+
+        sight.AddNextCommand(sight);
+        sight.AddNextCommand(move1);
+
+        move1.AddNextCommand(move2);
+        move2.AddNextCommand(sight);
+
+        program.AddCommand<IfSee>(sight);
+        program.AddCommand<MoveForward>(move1);
+        program.AddCommand<MoveBack>(move2);
+
+        return program;
+    }
+
     public void ProgramToTxt(Program program) //Stores the program as a JSON
     {
         string prog = JsonUtility.ToJson(program, true);
@@ -89,7 +131,7 @@ public class Computer : MonoBehaviour
                 break;
 
             currentCommand = nextCommand;
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(tickTime);
 
         }
 

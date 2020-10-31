@@ -9,7 +9,7 @@ public abstract class  Command
     public Program parentProgram;
     //TODO: make sure theyre pointers to commands
     [SerializeReference]
-    List<Command> nextCommands = new List<Command>(); //list of potential commands to run next. Its the branches on a tree
+    protected List<Command> nextCommands = new List<Command>(); //list of potential commands to run next. Its the branches on a tree
     public abstract bool Activate();
 
     //TODO: Getter setters?
