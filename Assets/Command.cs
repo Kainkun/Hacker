@@ -8,6 +8,7 @@ public abstract class  Command
     public Computer parentComputer;
     public Program parentProgram;
     //TODO: make sure theyre pointers to commands
+    [SerializeReference]
     List<Command> nextCommands = new List<Command>(); //list of potential commands to run next. Its the branches on a tree
     public abstract bool Activate();
 

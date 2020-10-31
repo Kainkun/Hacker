@@ -1,6 +1,6 @@
 {
     "parentComputer": {
-        "instanceID": -23592
+        "instanceID": 15406
     },
     "name": "Test_Program",
     "commands": [
@@ -24,11 +24,11 @@
             },
             "data": {
                 "parentComputer": {
-                    "instanceID": -23592
+                    "instanceID": 15406
                 },
                 "parentProgram": {
                     "parentComputer": {
-                        "instanceID": -23592
+                        "instanceID": 15406
                     },
                     "name": "Test_Program",
                     "commands": [
@@ -43,7 +43,12 @@
                         }
                     ]
                 },
-                "stringToPrint": "First Print"
+                "nextCommands": [
+                    {
+                        "id": 1
+                    }
+                ],
+                "stringToPrint": "First Print Edited"
             }
         },
         "00000001": {
@@ -54,11 +59,11 @@
             },
             "data": {
                 "parentComputer": {
-                    "instanceID": -23592
+                    "instanceID": 15406
                 },
                 "parentProgram": {
                     "parentComputer": {
-                        "instanceID": -23592
+                        "instanceID": 15406
                     },
                     "name": "Test_Program",
                     "commands": [
@@ -73,9 +78,14 @@
                         }
                     ]
                 },
+                "nextCommands": [
+                    {
+                        "id": 2
+                    }
+                ],
                 "directionToMove": {
-                    "x": 0.0,
-                    "y": 1.0
+                    "x": -2.0,
+                    "y": 2.0
                 }
             }
         },
@@ -87,11 +97,11 @@
             },
             "data": {
                 "parentComputer": {
-                    "instanceID": -23592
+                    "instanceID": 15406
                 },
                 "parentProgram": {
                     "parentComputer": {
-                        "instanceID": -23592
+                        "instanceID": 15406
                     },
                     "name": "Test_Program",
                     "commands": [
@@ -106,7 +116,8 @@
                         }
                     ]
                 },
-                "stringToPrint": "Second Print"
+                "nextCommands": [],
+                "stringToPrint": "FINAL PRINT"
             }
         },
         "00000003": {

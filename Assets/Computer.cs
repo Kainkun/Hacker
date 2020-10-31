@@ -5,13 +5,29 @@ using System.IO;
 
 public class Computer : MonoBehaviour
 {
-    List<Program> programs = new List<Program>(); //a computer has a list of programs it can run
+    public List<Program> programs = new List<Program>(); //a computer has a list of programs it can run
 
     private void Start()
     {
         AddProgram(CreateTestProgram()); //create and add a test program. DONT USE programs.Add, it needs to handle parenting with AddProgram
-        ProgramToTxt(programs[0]); //Store the program as a JSON
-        StartCoroutine(RunProgram(programs[0]));
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            StartCoroutine(RunProgram(programs[0]));
+        }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            ProgramToTxt(programs[0]); //Store the program as a JSON
+        }
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            programs[0] = TxtToProgram("Test_Program.txt");
+        }
     }
 
     public void AddProgram(Program program)
@@ -49,6 +65,13 @@ public class Computer : MonoBehaviour
         writer.WriteLine(prog);
         writer.Close();
         print($"Done saving program: {program.name}.txt");
+    }
+
+    public Program TxtToProgram(string fileName)
+    {
+        StreamReader reader = new StreamReader($"Assets/Resources/{fileName}");
+        string prog = reader.ReadToEnd();
+        return JsonUtility.FromJson<Program>(prog);
     }
 
     IEnumerator RunProgram(Program program)
