@@ -37,7 +37,7 @@ public class Computer : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            StartCoroutine(RunProgram(programs[0]));
+            RunProgram(programs[0]);
         }
 
         if (Input.GetKeyDown(KeyCode.S))
@@ -117,11 +117,39 @@ public class Computer : MonoBehaviour
         return program;
     }
 
-    IEnumerator RunProgram(Program program)
+
+
+    #region Running Programs
+    Coroutine runAttempt;
+    Coroutine currentRunningProgram;
+    bool runProgram;
+    public void RunProgram(Program program) //if program is alreay running, stop it gracefully by waiting for it the finish its last command, then run the new program once its fully stopped
     {
+        if(currentRunningProgram != null)
+            StopCurrentProgram();
+        if(runAttempt != null)
+            StopCoroutine(runAttempt);
+        runAttempt = StartCoroutine(_TryToRunProgram(program));
+    }
+    public void StopCurrentProgram()
+    {
+        runProgram = false;
+    }
+    IEnumerator _TryToRunProgram(Program program)
+    {
+        while(currentRunningProgram != null)
+        {
+            yield return null;
+        }
+        runAttempt = null;
+        currentRunningProgram = StartCoroutine(_RunProgram(program));
+    }
+    IEnumerator _RunProgram(Program program)
+    {
+        runProgram = true;
         Command currentCommand = program.GetCommand(0);
 
-        while (true)
+        while (runProgram)
         {
             currentCommand.Activate();
 
@@ -134,7 +162,10 @@ public class Computer : MonoBehaviour
 
         }
 
+        runProgram = false;
+        currentRunningProgram = null;
         print("program done");
     }
+    #endregion
 
 }
