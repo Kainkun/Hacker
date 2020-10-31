@@ -41,9 +41,9 @@ public class Computer : MonoBehaviour
             RunProgram(programs[0]);
         }
 
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            ProgramToTxt(programs[0]); //Store the program as a JSON
+            ProgramToTxt(programs[0]); //Export the program as a JSON
         }
 
         if (Input.GetKeyDown(KeyCode.L))
@@ -153,13 +153,14 @@ public class Computer : MonoBehaviour
         while (runningProgram)
         {
             currentCommand.Activate();
+            
+            yield return new WaitForSeconds(tickTime);
 
             Command nextCommand = currentCommand.GetNextCommand();
             if (nextCommand == null)
                 break;
 
             currentCommand = nextCommand;
-            yield return new WaitForSeconds(tickTime);
         }
 
         runningProgram = false;

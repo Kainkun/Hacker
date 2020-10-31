@@ -15,16 +15,8 @@ public class IfSee : Command
     public override bool Activate()
     {
         nextCommandIndex = 0;
-        List<GameObject> objects = parentComputer.sensors.ObjectsInView();
 
-        foreach (var item in objects)
-        {
-            if (item.tag == tag)
-            {
-                nextCommandIndex = 1;
-                return true;
-            }
-        }
+        parentComputer.sensors.StartCoroutine(parentComputer.sensors.LookForTag(tag, retval => { if (retval) nextCommandIndex = 1; })); //use of callback to return a value
 
         return true;
     }
@@ -33,4 +25,6 @@ public class IfSee : Command
     {
         return nextCommands[nextCommandIndex];
     }
+
+
 }

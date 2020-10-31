@@ -10,7 +10,38 @@ public class Sensors : ComputerModule
     public float visionDistance = 3;
     public float visionAngle = 90;
 
-    public List<GameObject> ObjectsInView()
+    public IEnumerator LookForTag(string tag, System.Action<bool> callback) //look for objects with tag for the duration of the command, uses a callback to return a value
+    {
+        float time = 0;
+        while (time < parentComputer.tickTime)
+        {
+            if (LookForObjectWithTag(tag))
+            {
+                callback(true);
+                yield break;
+            }
+            time += Time.deltaTime;
+            yield return null;
+        }
+        callback(false);
+    }
+
+    bool LookForObjectWithTag(string tag)
+    {
+        List<GameObject> objects = ObjectsInView();
+
+        foreach (var item in objects)
+        {
+            if (item.tag == tag)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    List<GameObject> ObjectsInView() //get all objects that are in the sensor's view
     {
         List<Collider2D> colliders;
 
@@ -40,6 +71,10 @@ public class Sensors : ComputerModule
             return false;
     }
 
+
+
+
+
     public void Infront()
     {
 
@@ -49,7 +84,7 @@ public class Sensors : ComputerModule
     private void OnDrawGizmos()
     {
         Handles.color = new Color(1f, 0.2f, 0.2f, 0.2f);
-        Vector3 startDir = new Vector3(Mathf.Cos(((visionAngle / 2)  + transform.eulerAngles.z) * Mathf.Deg2Rad), Mathf.Sin(((visionAngle / 2)  + transform.eulerAngles.z) * Mathf.Deg2Rad), 0);
+        Vector3 startDir = new Vector3(Mathf.Cos(((visionAngle / 2) + transform.eulerAngles.z) * Mathf.Deg2Rad), Mathf.Sin(((visionAngle / 2) + transform.eulerAngles.z) * Mathf.Deg2Rad), 0);
         Handles.DrawSolidArc(transform.position, -Vector3.forward, startDir, visionAngle, visionDistance);
     }
 #endif
