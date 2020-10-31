@@ -131,11 +131,11 @@ public class Computer : MonoBehaviour
             StopCoroutine(runAttempt);
         runAttempt = StartCoroutine(_TryToRunProgram(program));
     }
-    public void StopCurrentProgram()
+    public void StopCurrentProgram()//allows the current program to finish its current command
     {
         runProgram = false;
     }
-    IEnumerator _TryToRunProgram(Program program)
+    IEnumerator _TryToRunProgram(Program program)//wait for the current program to finish before starting the new program
     {
         while(currentRunningProgram != null)
         {
@@ -159,7 +159,6 @@ public class Computer : MonoBehaviour
 
             currentCommand = nextCommand;
             yield return new WaitForSeconds(tickTime);
-
         }
 
         runProgram = false;
