@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class Sensors : ComputerModule
 {
@@ -42,4 +45,13 @@ public class Sensors : ComputerModule
     {
 
     }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        Handles.color = new Color(1f, 0.2f, 0.2f, 0.2f);
+        Vector3 startDir = new Vector3(Mathf.Cos(((visionAngle / 2)  + transform.eulerAngles.z) * Mathf.Deg2Rad), Mathf.Sin(((visionAngle / 2)  + transform.eulerAngles.z) * Mathf.Deg2Rad), 0);
+        Handles.DrawSolidArc(transform.position, -Vector3.forward, startDir, visionAngle, visionDistance);
+    }
+#endif
 }
