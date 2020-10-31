@@ -30,7 +30,8 @@ public class Computer : MonoBehaviour
 
     private void Start()
     {
-        AddProgram(CreateTestProgram()); //create and add a test program. DONT USE programs.Add, it needs to handle parenting with AddProgram
+        AddProgram(CreateTestProgramSight()); //create and add a test program. DONT USE programs.Add, it needs to handle parenting with AddProgram
+        RunProgram(programs[0]);
     }
 
     private void Update()
@@ -122,7 +123,7 @@ public class Computer : MonoBehaviour
     #region Running Programs
     Coroutine runAttempt;
     Coroutine currentRunningProgram;
-    bool runProgram;
+    bool runningProgram;
     public void RunProgram(Program program) //if program is alreay running, stop it gracefully by waiting for it the finish its last command, then run the new program once its fully stopped
     {
         if(currentRunningProgram != null)
@@ -133,7 +134,7 @@ public class Computer : MonoBehaviour
     }
     public void StopCurrentProgram()//allows the current program to finish its current command
     {
-        runProgram = false;
+        runningProgram = false;
     }
     IEnumerator _TryToRunProgram(Program program)//wait for the current program to finish before starting the new program
     {
@@ -146,10 +147,10 @@ public class Computer : MonoBehaviour
     }
     IEnumerator _RunProgram(Program program)
     {
-        runProgram = true;
+        runningProgram = true;
         Command currentCommand = program.GetCommand(0);
 
-        while (runProgram)
+        while (runningProgram)
         {
             currentCommand.Activate();
 
@@ -161,7 +162,7 @@ public class Computer : MonoBehaviour
             yield return new WaitForSeconds(tickTime);
         }
 
-        runProgram = false;
+        runningProgram = false;
         currentRunningProgram = null;
         print("program done");
     }
