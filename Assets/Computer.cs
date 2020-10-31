@@ -1,0 +1,74 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System.IO;
+
+public class Computer : MonoBehaviour
+{
+    List<Program> programs = new List<Program>(); //a computer has a list of programs it can run
+
+    private void Start()
+    {
+        AddProgram(CreateTestProgram()); //create and add a test program. DONT USE programs.Add, it needs to handle parenting with AddProgram
+        ProgramToTxt(programs[0]); //Store the program as a JSON
+        StartCoroutine(RunProgram(programs[0]));
+    }
+
+    public void AddProgram(Program program)
+    {
+        //program.parentComputer = this; //this is being handled in the constructor ATM
+        programs.Add(program);
+    }
+
+    public Program CreateTestProgram()
+    {
+        Program program = new Program("Test_Program", this);
+
+        //create different commands the program will run
+        Print print1 = new Print("First Print");
+        Move move1 = new Move(new Vector2(0, 1));
+        Print print2 = new Print("Second Print");
+
+        //create the flow of commands, first command runs first
+        print1.AddNextCommand(move1);
+        move1.AddNextCommand(print2);
+
+        //add the programs to the program's list of commands
+        //TODO: maybe this can be combined with the creattion of a command?
+        program.AddCommand<Print>(print1);
+        program.AddCommand<Move>(move1);
+        program.AddCommand<Print>(print2);
+
+        return program;
+    }
+
+    public void ProgramToTxt(Program program) //Stores the program as a JSON
+    {
+        string prog = JsonUtility.ToJson(program, true);
+        StreamWriter writer = new StreamWriter($"Assets/Resources/{program.name}.txt");
+        writer.WriteLine(prog);
+        writer.Close();
+        print($"Done saving program: {program.name}.txt");
+    }
+
+    IEnumerator RunProgram(Program program)
+    {
+        Command currentCommand = program.GetCommand(0);
+
+        while (true)
+        {
+            currentCommand.Activate();
+
+            Command nextCommand = currentCommand.GetNextCommand();
+            if (nextCommand == null)
+                break;
+
+            currentCommand = nextCommand;
+            yield return new WaitForSeconds(1);
+
+        }
+
+        print("program done");
+    }
+
+}
