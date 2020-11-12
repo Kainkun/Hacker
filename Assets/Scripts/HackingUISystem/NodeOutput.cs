@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI.Extensions;
 
 public class NodeOutput : NodeConnector
 {
@@ -14,6 +15,11 @@ public class NodeOutput : NodeConnector
             nextNodeInput.previousNodeInput = null;
         }
         nextNodeInput = null;
+    }
+
+    public override NodeConnector GetOppositePair()
+    {
+        return nextNodeInput;
     }
 
     protected override bool IsOppositeSlot(Component component)

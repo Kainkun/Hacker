@@ -18,6 +18,7 @@ public abstract class NodeConnector : EventTrigger
     protected abstract bool IsOppositeSlot(Component component);
     protected abstract void SetUpConnection(NodeConnector component);
     protected abstract void Disconnect();
+    public abstract NodeConnector GetOppositePair();
 
 
     public void Update()
@@ -51,9 +52,9 @@ public abstract class NodeConnector : EventTrigger
         NodeConnector connection = GetConnection(eventData);
         if (connection)
         {
-            line.Points[1] = connection.transform.position - gameObject.transform.position;
-            line.SetAllDirty();
             SetUpConnection(connection);
+            SetLinePositions();
+            //line.Points[1] = connection.transform.position - gameObject.transform.position;
         }
         else
         {
@@ -70,16 +71,62 @@ public abstract class NodeConnector : EventTrigger
             var nc = item.GetComponent<NodeConnector>();
             if (nc && IsOppositeSlot(nc))
             {
-                print("YES");
                 return nc;
             }
         }
         return null;
     }
 
+    public UILineRenderer GetLineRenderer()
+    {
+        var oppositePair = GetOppositePair();
+
+        if (line)
+            return line;
+        else if (oppositePair && oppositePair.line)
+            return oppositePair.line;
+        else
+            return null;
+    }
+
     public void DestroyLine()
     {
         Destroy(lineObject);
+    }
+
+    public void SetLinePositions()
+    {
+        //AAAAAAAA I GOT IT WORKING BUT I GIVE UP
+        var lineRenderer = GetLineRenderer();
+
+        if (line)
+        {
+            if (GetComponent<NodeOutput>())
+            {
+                lineRenderer.Points[0] = Vector2.zero;
+                lineRenderer.Points[1] = GetOppositePair().transform.position - transform.position;
+            }
+            else
+            {
+                lineRenderer.Points[0] = GetOppositePair().transform.position - transform.position;
+                lineRenderer.Points[1] = Vector2.zero;
+            }
+        }
+        else
+        {
+            if (GetComponent<NodeOutput>())
+            {
+                lineRenderer.Points[0] = transform.position - GetOppositePair().transform.position;
+                lineRenderer.Points[1] = Vector2.zero;
+            }
+            else
+            {
+                lineRenderer.Points[0] = Vector2.zero;
+                lineRenderer.Points[1] = transform.position - GetOppositePair().transform.position;
+            }
+        }
+
+        lineRenderer.SetAllDirty();
     }
 
 }

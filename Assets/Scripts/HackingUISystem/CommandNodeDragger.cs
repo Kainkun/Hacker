@@ -1,15 +1,16 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.UI.Extensions;
 
 public class CommandNodeDragger : EventTrigger
 {
 
     private bool dragging;
-
+    NodeConnector[] nodeConnectors;
     private void Awake()
     {
-        GetComponentsInChildren<NodeInput>();
+        nodeConnectors = GetComponentsInChildren<NodeConnector>();
     }
 
     public void Update()
@@ -17,6 +18,13 @@ public class CommandNodeDragger : EventTrigger
         if (dragging)
         {
             transform.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            foreach (var nodeConnector in nodeConnectors)
+            {
+                UILineRenderer lineRenderer = nodeConnector.GetLineRenderer();
+                if(lineRenderer)
+                    nodeConnector.SetLinePositions();
+                //lineRenderer.Points[1] = nodeConnector.transform.position;
+            }
         }
     }
 
