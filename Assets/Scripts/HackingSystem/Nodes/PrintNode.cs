@@ -9,4 +9,9 @@ public class PrintNode : CommandNodeDragger
     {
         return typeof(Print);
     }
+
+    public void SetPrintString(string str)
+    {
+        ((Print)attachedCommand).SetPrintString(str);
+    }
 }

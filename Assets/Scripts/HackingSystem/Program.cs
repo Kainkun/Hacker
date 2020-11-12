@@ -30,7 +30,11 @@ public class Program
 
     public Command GetCommand(int i)
     {
-        return commands[i];
+        if (i < commands.Count)
+        {
+            return commands[i];
+        }
+        return null;
     }
 
     public List<Command> GetCommands()

@@ -13,12 +13,14 @@ public abstract class NodeConnector : EventTrigger
     GameObject lineObject;
     UILineRenderer line;
 
-    public Command parentCommand;
+    public CommandNodeDragger parentNode;
 
     protected abstract bool IsOppositeSlot(Component component);
-    protected abstract void SetUpConnection(NodeConnector component);
     protected abstract void Disconnect();
     public abstract NodeConnector GetOppositePair();
+    public abstract NodeInput GetInputPair();
+    public abstract NodeOutput GetOutputPair();
+    public abstract void SetOppositePair(NodeConnector nodeConnector);
 
 
     public void Update()
@@ -63,6 +65,31 @@ public abstract class NodeConnector : EventTrigger
 
         dragging = false;
     }
+
+    public void SetUpConnection(NodeConnector component)
+    {
+        
+        SetOppositePair(component.GetComponent<NodeConnector>());
+        GetOppositePair().SetOppositePair(this);
+
+        print("A");
+        if(parentNode.attachedCommand is Next)
+        {
+            print("B");
+
+            ((Next)GetOutputPair().parentNode.attachedCommand).SetNextCommand(GetInputPair().parentNode.attachedCommand);
+        }
+    }
+
+    // public void Disconnect()
+    // {
+    //     if (GetOppositePair())
+    //     {
+    //         GetOppositePair().DestroyLine();
+    //         GetOppositePair().SetOppositePair(null);
+    //     }
+    //     SetOppositePair(null);
+    // }
 
     NodeConnector GetConnection(PointerEventData eventData)
     {

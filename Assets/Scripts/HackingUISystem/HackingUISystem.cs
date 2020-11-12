@@ -12,6 +12,7 @@ public class HackingUISystem : MonoBehaviour
     List<CommandNodeDragger> nodes = new List<CommandNodeDragger>();
 
     public GameObject genericCommandNode;
+    public GameObject PrintNode;
 
     private void Awake()
     {
@@ -26,7 +27,6 @@ public class HackingUISystem : MonoBehaviour
         //currentlyEditingProgram = currentlyEditingComputer.programs[0];
         currentlyEditingProgram = new Program("UIMadeProgram", currentlyEditingComputer);
         currentlyEditingComputer.programs[0] = currentlyEditingProgram;
-        CreateNode(typeof(Print));
         //DisplayProgram(currentlyEditingProgram);
     }
 
@@ -36,6 +36,11 @@ public class HackingUISystem : MonoBehaviour
         {
             currentlyEditingComputer.RunProgram(0);
         }
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            CreateNode(typeof(Print));
+        }
+
     }
 
     public void EditComputer(Computer computer)
@@ -88,7 +93,7 @@ public class HackingUISystem : MonoBehaviour
         Command command = currentlyEditingProgram.CreateCommand(type);
 
         if (type == typeof(Print))
-            nodes.Add(Instantiate(genericCommandNode, transform).AddComponent<PrintNode>());
+            nodes.Add(Instantiate(PrintNode, transform).GetComponent<PrintNode>());
         else if (type == typeof(Move))
             nodes.Add(Instantiate(genericCommandNode, transform).AddComponent<MoveNode>());
         else if (type == typeof(MoveForward))

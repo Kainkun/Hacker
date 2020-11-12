@@ -13,6 +13,10 @@ public abstract class CommandNodeDragger : EventTrigger
     private void Awake()
     {
         nodeConnectors = GetComponentsInChildren<NodeConnector>();
+        foreach (var nodeConnector in nodeConnectors)
+        {
+            nodeConnector.parentNode = this;
+        }
     }
 
     public void Update()

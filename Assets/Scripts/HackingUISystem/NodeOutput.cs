@@ -22,9 +22,14 @@ public class NodeOutput : NodeConnector
         return nextNodeInput;
     }
 
+    public override void SetOppositePair(NodeConnector nodeConnector)
+    {
+        nextNodeInput = nodeConnector.GetComponent<NodeInput>();
+    }
+
     protected override bool IsOppositeSlot(Component component)
     {
-        if(component.GetType() == typeof(NodeInput))
+        if (component.GetType() == typeof(NodeInput))
         {
             return true;
         }
@@ -32,9 +37,13 @@ public class NodeOutput : NodeConnector
         return false;
     }
 
-    protected override void SetUpConnection(NodeConnector component)
+    public override NodeInput GetInputPair()
     {
-        nextNodeInput = component.GetComponent<NodeInput>();
-        nextNodeInput.previousNodeInput = this;
+        return (NodeInput)GetOppositePair();
+    }
+
+    public override NodeOutput GetOutputPair()
+    {
+        return this;
     }
 }

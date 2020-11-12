@@ -31,25 +31,25 @@ public class Computer : MonoBehaviour
 
     private void Start()
     {
-        
+
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            RunProgram(programs[0]);
-        }
+        // if (Input.GetKeyDown(KeyCode.R))
+        // {
+        //     RunProgram(programs[0]);
+        // }
 
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            ProgramToTxt(programs[0]); //Export the program as a JSON
-        }
+        // if (Input.GetKeyDown(KeyCode.E))
+        // {
+        //     ProgramToTxt(programs[0]); //Export the program as a JSON
+        // }
 
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            programs[0] = TxtToProgram("SightTest_Program.txt");
-        }
+        // if (Input.GetKeyDown(KeyCode.L))
+        // {
+        //     programs[0] = TxtToProgram("SightTest_Program.txt");
+        // }
     }
 
     public void AddProgram(Program program)
@@ -126,13 +126,16 @@ public class Computer : MonoBehaviour
     bool runningProgram;
     public void RunProgram(int i)
     {
-        RunProgram(programs[i]);
+        if (i < programs.Count)
+            RunProgram(programs[i]);
+        else
+            Debug.LogError("bad Program index");
     }
     public void RunProgram(Program program) //if program is alreay running, stop it gracefully by waiting for it the finish its last command, then run the new program once its fully stopped
     {
-        if(currentRunningProgram != null)
+        if (currentRunningProgram != null)
             StopCurrentProgram();
-        if(runAttempt != null)
+        if (runAttempt != null)
             StopCoroutine(runAttempt);
         runAttempt = StartCoroutine(_TryToRunProgram(program));
     }
@@ -142,7 +145,7 @@ public class Computer : MonoBehaviour
     }
     IEnumerator _TryToRunProgram(Program program)//wait for the current program to finish before starting the new program
     {
-        while(currentRunningProgram != null)
+        while (currentRunningProgram != null)
         {
             yield return null;
         }
@@ -154,10 +157,10 @@ public class Computer : MonoBehaviour
         runningProgram = true;
         Command currentCommand = program.GetCommand(0);
 
-        while (runningProgram)
+        while (runningProgram && currentCommand != null)
         {
             currentCommand.Activate();
-            
+
             yield return new WaitForSeconds(tickTime);
 
             Command nextCommand = currentCommand.GetNextCommand();
