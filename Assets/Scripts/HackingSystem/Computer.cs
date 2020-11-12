@@ -17,7 +17,6 @@ public class Computer : MonoBehaviour
     private void Awake()
     {
         AddModules();
-        AddProgram(CreateTestProgram()); //create and add a test program. DONT USE programs.Add, it needs to handle parenting with AddProgram
     }
 
     void AddModules()
@@ -31,25 +30,25 @@ public class Computer : MonoBehaviour
 
     private void Start()
     {
-
+        
     }
 
     private void Update()
     {
-        // if (Input.GetKeyDown(KeyCode.R))
-        // {
-        //     RunProgram(programs[0]);
-        // }
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            RunProgram(programs[0]);
+        }
 
-        // if (Input.GetKeyDown(KeyCode.E))
-        // {
-        //     ProgramToTxt(programs[0]); //Export the program as a JSON
-        // }
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            ProgramToTxt(programs[0]); //Export the program as a JSON
+        }
 
-        // if (Input.GetKeyDown(KeyCode.L))
-        // {
-        //     programs[0] = TxtToProgram("SightTest_Program.txt");
-        // }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            AddProgram(TxtToProgram("SightTest_Program.txt"));
+        }
     }
 
     public void AddProgram(Program program)
@@ -159,9 +158,11 @@ public class Computer : MonoBehaviour
 
         while (runningProgram && currentCommand != null)
         {
+            currentCommand.connectedNode?.ActivateIcon();
             currentCommand.Activate();
 
             yield return new WaitForSeconds(tickTime);
+            currentCommand.connectedNode?.ActivateIcon(false);
 
             Command nextCommand = currentCommand.GetNextCommand();
             if (nextCommand == null)

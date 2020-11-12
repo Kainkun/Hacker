@@ -1,35 +1,92 @@
 {
     "parentComputer": {
-        "instanceID": 16170
+        "instanceID": 30334
     },
     "name": "UIMadeProgram",
     "commands": [
         {
             "id": 0
+        },
+        {
+            "id": 1
+        },
+        {
+            "id": 2
         }
     ],
     "references": {
         "version": 1,
         "00000000": {
             "type": {
-                "class": "Print",
+                "class": "MoveForward",
                 "ns": "",
                 "asm": "Assembly-CSharp"
             },
             "data": {
                 "parentComputer": {
-                    "instanceID": 16170
+                    "instanceID": 30334
                 },
                 "parentProgram": {
-                    "id": 1
+                    "id": 3
+                },
+                "connectedNode": {
+                    "instanceID": -80584
                 },
                 "nextCommand": {
-                    "id": 2
-                },
-                "stringToPrint": "He"
+                    "id": 1
+                }
             }
         },
         "00000001": {
+            "type": {
+                "class": "MoveBack",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentComputer": {
+                    "instanceID": 30334
+                },
+                "parentProgram": {
+                    "id": 3
+                },
+                "connectedNode": {
+                    "instanceID": -80626
+                },
+                "nextCommand": {
+                    "id": 2
+                }
+            }
+        },
+        "00000002": {
+            "type": {
+                "class": "IfSee",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentComputer": {
+                    "instanceID": 30334
+                },
+                "parentProgram": {
+                    "id": 3
+                },
+                "connectedNode": {
+                    "instanceID": -80666
+                },
+                "nextCommand": {
+                    "id": 4
+                },
+                "ifTrue": {
+                    "id": 0
+                },
+                "ifFalse": {
+                    "id": 2
+                },
+                "tag": "Player"
+            }
+        },
+        "00000003": {
             "type": {
                 "class": "Program",
                 "ns": "",
@@ -37,17 +94,23 @@
             },
             "data": {
                 "parentComputer": {
-                    "instanceID": 16170
+                    "instanceID": 30334
                 },
                 "name": "UIMadeProgram",
                 "commands": [
                     {
                         "id": 0
+                    },
+                    {
+                        "id": 1
+                    },
+                    {
+                        "id": 2
                     }
                 ]
             }
         },
-        "00000002": {
+        "00000004": {
             "type": {
                 "class": "",
                 "ns": "",
@@ -55,7 +118,7 @@
             },
             "data": {}
         },
-        "00000003": {
+        "00000005": {
             "type": {
                 "class": "Terminus",
                 "ns": "UnityEngine.DMAT",

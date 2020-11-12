@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class IfSeeNode : CommandNodeDragger
+public class IfNode : CommandNodeDragger
 {
     public override Type AssociatedType()
     {
-        return typeof(IfSee);
+        return typeof(If);
     }
+
+
 }

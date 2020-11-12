@@ -10,8 +10,10 @@ public abstract class CommandNodeDragger : EventTrigger
     public Command attachedCommand;
     private bool dragging;
     NodeConnector[] nodeConnectors;
+    Image nodeIcon;
     private void Awake()
     {
+        nodeIcon = GetComponent<Image>();
         nodeConnectors = GetComponentsInChildren<NodeConnector>();
         foreach (var nodeConnector in nodeConnectors)
         {
@@ -42,6 +44,11 @@ public abstract class CommandNodeDragger : EventTrigger
     public override void OnPointerUp(PointerEventData eventData)
     {
         dragging = false;
+    }
+
+    public void ActivateIcon(bool activate = true)
+    {
+        nodeIcon.color = activate ? Color.green : Color.white;
     }
 
 }

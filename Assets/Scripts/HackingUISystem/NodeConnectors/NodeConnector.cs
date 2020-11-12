@@ -36,7 +36,11 @@ public abstract class NodeConnector : EventTrigger
     {
         dragging = true;
 
-        Disconnect();
+        NodeConnector connection = GetConnection(eventData);
+        if (connection && connection is NodeInput)
+        {
+            Disconnect();
+        }
 
         if (!line)
         {
@@ -72,21 +76,39 @@ public abstract class NodeConnector : EventTrigger
         GetOppositePair().SetOppositePair(this);
 
         //Set up Command connections
-        if(GetOutputPair().parentNode.attachedCommand is Next)
+        if (GetOutputPair().parentNode.attachedCommand is Next)
         {
             ((Next)GetOutputPair().parentNode.attachedCommand).SetNextCommand(GetInputPair().parentNode.attachedCommand);
+        }
+        else if (GetOutputPair().parentNode.attachedCommand is If)
+        {
+            if (GetOutputPair() is NodeOutputTrue)
+                ((If)GetOutputPair().parentNode.attachedCommand).SetIfTrue(GetInputPair().parentNode.attachedCommand);
+            else if (GetOutputPair() is NodeOutputFalse)
+                ((If)GetOutputPair().parentNode.attachedCommand).SetIfFalse(GetInputPair().parentNode.attachedCommand);
+            else
+                Debug.LogError("Node Output. Needs to be true or false based");
         }
     }
 
     public void Disconnect()
     {
-        if(!GetOppositePair())
+        if (!GetOppositePair())
             return;
 
         //Disconnect Commands
-        if(GetOutputPair().parentNode.attachedCommand is Next)
+        if (GetOutputPair().parentNode.attachedCommand is Next)
         {
             ((Next)GetOutputPair().parentNode.attachedCommand).SetNextCommand(null);
+        }
+        else if (GetOutputPair().parentNode.attachedCommand is If)
+        {
+            if (GetOutputPair() is NodeOutputTrue)
+                ((If)GetOutputPair().parentNode.attachedCommand).SetIfTrue(null);
+            else if (GetOutputPair() is NodeOutputFalse)
+                ((If)GetOutputPair().parentNode.attachedCommand).SetIfFalse(null);
+            else
+                Debug.LogError("Node Output. Needs to be true or false based");
         }
 
         //Disconnect Nodes
