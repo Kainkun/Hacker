@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public abstract class  Command
+public abstract class Command
 {
     [SerializeReference]
     public Computer parentComputer;
@@ -11,20 +11,11 @@ public abstract class  Command
     public Program parentProgram;
     //TODO: make sure theyre pointers to commands
     [SerializeReference]
-    protected List<Command> nextCommands = new List<Command>(); //list of potential commands to run next. Its the branches on a tree
-    public abstract bool Activate();
-
-    //TODO: Getter setters?
-    public void AddNextCommand(Command command)
-    {
-        nextCommands.Add(command);
-    }
+    protected Command nextCommand; //list of potential commands to run next. Its the branches on a tree
+    public abstract void Activate();
 
     public virtual Command GetNextCommand()
     {
-        if(nextCommands.Count == 0)
-            return null;
-        else
-            return nextCommands[0];
+        return nextCommand;
     }
 }

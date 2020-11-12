@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Print : Command
+public class Print : Next
 {
     public string stringToPrint;
 
@@ -11,9 +11,8 @@ public class Print : Command
         stringToPrint = str;
     }
 
-    public override bool Activate()
+    public override void Activate()
     {
         Debug.Log(stringToPrint);
-        return true;
     }
 }

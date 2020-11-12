@@ -2,29 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IfSee : Command
+public class IfSee : If
 {
     public string tag;
-    int nextCommandIndex;
 
     public IfSee(string tag)
     {
         this.tag = tag;
     }
 
-    public override bool Activate()
+    public override void Activate()
     {
-        nextCommandIndex = 0;
-
-        parentComputer.sensors.StartCoroutine(parentComputer.sensors.LookForTag(tag, retval => { if (retval) nextCommandIndex = 1; })); //use of callback to return a value
-
-        return true;
+        parentComputer.sensors.StartCoroutine(parentComputer.sensors.LookForTag(tag, retval => { if (retval) nextCommand = ifTrue; else nextCommand = ifFalse; })); //use of callback to return a value
     }
-
-    public override Command GetNextCommand()
-    {
-        return nextCommands[nextCommandIndex];
-    }
-
 
 }

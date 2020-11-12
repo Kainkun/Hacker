@@ -68,8 +68,8 @@ public class Computer : MonoBehaviour
         Print print2 = new Print("Second Print");
 
         //create the flow of commands, first command runs first
-        print1.AddNextCommand(move1);
-        move1.AddNextCommand(print2);
+        print1.SetNextCommand(move1);
+        move1.SetNextCommand(print2);
 
         //add the programs to the program's list of commands
         //TODO: maybe this can be combined with the creattion of a command?
@@ -86,15 +86,15 @@ public class Computer : MonoBehaviour
 
         MoveForward move1 = new MoveForward();
         MoveBack move2 = new MoveBack();
-        IfSee sight = new IfSee("Player");
+        IfSee ifSee = new IfSee("Player");
 
-        sight.AddNextCommand(sight);
-        sight.AddNextCommand(move1);
+        ifSee.SetIfFalse(ifSee);
+        ifSee.SetIfTrue(move1);
 
-        move1.AddNextCommand(move2);
-        move2.AddNextCommand(sight);
+        move1.SetNextCommand(move2);
+        move2.SetNextCommand(ifSee);
 
-        program.AddCommand(sight);
+        program.AddCommand(ifSee);
         program.AddCommand(move1);
         program.AddCommand(move2);
         return program;
