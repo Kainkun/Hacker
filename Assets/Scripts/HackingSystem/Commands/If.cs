@@ -4,7 +4,9 @@ using UnityEngine;
 
 public abstract class If : Command
 {
+    [SerializeReference]
     protected Command ifTrue;
+    [SerializeReference]
     protected Command ifFalse;
 
     public void SetIfTrue(Command command)
