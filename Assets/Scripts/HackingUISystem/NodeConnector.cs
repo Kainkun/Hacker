@@ -16,7 +16,6 @@ public abstract class NodeConnector : EventTrigger
     public CommandNodeDragger parentNode;
 
     protected abstract bool IsOppositeSlot(Component component);
-    protected abstract void Disconnect();
     public abstract NodeConnector GetOppositePair();
     public abstract NodeInput GetInputPair();
     public abstract NodeOutput GetOutputPair();
@@ -68,28 +67,36 @@ public abstract class NodeConnector : EventTrigger
 
     public void SetUpConnection(NodeConnector component)
     {
-        
+        //Set up Node connections
         SetOppositePair(component.GetComponent<NodeConnector>());
         GetOppositePair().SetOppositePair(this);
 
-        print("A");
-        if(parentNode.attachedCommand is Next)
+        //Set up Command connections
+        if(GetOutputPair().parentNode.attachedCommand is Next)
         {
-            print("B");
-
             ((Next)GetOutputPair().parentNode.attachedCommand).SetNextCommand(GetInputPair().parentNode.attachedCommand);
         }
     }
 
-    // public void Disconnect()
-    // {
-    //     if (GetOppositePair())
-    //     {
-    //         GetOppositePair().DestroyLine();
-    //         GetOppositePair().SetOppositePair(null);
-    //     }
-    //     SetOppositePair(null);
-    // }
+    public void Disconnect()
+    {
+        if(!GetOppositePair())
+            return;
+
+        //Disconnect Commands
+        if(GetOutputPair().parentNode.attachedCommand is Next)
+        {
+            ((Next)GetOutputPair().parentNode.attachedCommand).SetNextCommand(null);
+        }
+
+        //Disconnect Nodes
+        if (GetOppositePair())
+        {
+            GetOppositePair().DestroyLine();
+            GetOppositePair().SetOppositePair(null);
+        }
+        SetOppositePair(null);
+    }
 
     NodeConnector GetConnection(PointerEventData eventData)
     {
