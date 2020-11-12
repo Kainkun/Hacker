@@ -157,6 +157,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   genericCommandNode: {fileID: 3210252642966513753, guid: 3190f72829f31e247bdd695ced3c6dbd, type: 3}
   PrintNode: {fileID: 3210252642966513753, guid: 66f5fde3221cc0247a03deac7a3e2a03, type: 3}
+  MoveForwardNode: {fileID: 3569913411261331213, guid: a7dc874d881c6c34a8631734b41a5d0f, type: 3}
+  MoveBackNode: {fileID: 4793322041250429194, guid: bc375154a1dac6c41ac47d191b5c5ab9, type: 3}
+  MoveLeftNode: {fileID: 3023334998584143436, guid: 157825b56f5f9c249b2159fac917a4fb, type: 3}
+  MoveRightNode: {fileID: 7695260938249669557, guid: 8be303194fcae2b429673686ec61652a, type: 3}
 --- !u!114 &357741174
 MonoBehaviour:
   m_ObjectHideFlags: 0

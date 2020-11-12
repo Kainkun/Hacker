@@ -65,7 +65,7 @@ GameObject:
   - component: {fileID: 3210252642877989179}
   - component: {fileID: 3210252642877989178}
   m_Layer: 5
-  m_Name: NodeOutputP
+  m_Name: NodeOutput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -141,6 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delegates: []
+  parentNode: {fileID: 0}
   nextNodeInput: {fileID: 0}
 --- !u!1 &3210252642952500999
 GameObject:
@@ -231,6 +232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delegates: []
+  parentNode: {fileID: 0}
   previousNodeInput: {fileID: 0}
 --- !u!1 &3210252642966513753
 GameObject:

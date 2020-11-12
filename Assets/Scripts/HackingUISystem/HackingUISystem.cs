@@ -13,6 +13,10 @@ public class HackingUISystem : MonoBehaviour
 
     public GameObject genericCommandNode;
     public GameObject PrintNode;
+    public GameObject MoveForwardNode;
+    public GameObject MoveBackNode;
+    public GameObject MoveLeftNode;
+    public GameObject MoveRightNode;
 
     private void Awake()
     {
@@ -39,6 +43,22 @@ public class HackingUISystem : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.N))
         {
             CreateNode(typeof(Print));
+        }
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            CreateNode(typeof(MoveForward));
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            CreateNode(typeof(MoveRight));
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            CreateNode(typeof(MoveBack));
+        }
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            CreateNode(typeof(MoveLeft));
         }
 
     }
@@ -97,13 +117,13 @@ public class HackingUISystem : MonoBehaviour
         else if (type == typeof(Move))
             nodes.Add(Instantiate(genericCommandNode, transform).AddComponent<MoveNode>());
         else if (type == typeof(MoveForward))
-            nodes.Add(Instantiate(genericCommandNode, transform).AddComponent<MoveForwardNode>());
+            nodes.Add(Instantiate(MoveForwardNode, transform).AddComponent<MoveForwardNode>());
         else if (type == typeof(MoveBack))
-            nodes.Add(Instantiate(genericCommandNode, transform).AddComponent<MoveBackNode>());
+            nodes.Add(Instantiate(MoveBackNode, transform).AddComponent<MoveBackNode>());
         else if (type == typeof(MoveLeft))
-            nodes.Add(Instantiate(genericCommandNode, transform).AddComponent<MoveLeftNode>());
+            nodes.Add(Instantiate(MoveLeftNode, transform).AddComponent<MoveLeftNode>());
         else if (type == typeof(MoveRight))
-            nodes.Add(Instantiate(genericCommandNode, transform).AddComponent<MoveRightNode>());
+            nodes.Add(Instantiate(MoveRightNode, transform).AddComponent<MoveRightNode>());
         else if (type == typeof(IfSee))
             nodes.Add(Instantiate(genericCommandNode, transform).AddComponent<IfSeeNode>());
 
