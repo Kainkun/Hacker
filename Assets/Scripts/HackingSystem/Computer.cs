@@ -64,18 +64,18 @@ public class Computer : MonoBehaviour
 
         //create different commands the program will run
         Print print1 = new Print("First Print");
+        program.AddCommand(print1);
         Move move1 = new Move(new Vector2(0, 1));
+        program.AddCommand(move1);
         Print print2 = new Print("Second Print");
+        program.AddCommand(print2);
 
         //create the flow of commands, first command runs first
-        print1.AddNextCommand(move1);
-        move1.AddNextCommand(print2);
+        print1.SetNextCommand(move1);
+        move1.SetNextCommand(print2);
 
         //add the programs to the program's list of commands
         //TODO: maybe this can be combined with the creattion of a command?
-        program.AddCommand(print1);
-        program.AddCommand(move1);
-        program.AddCommand(print2);
 
         return program;
     }
@@ -85,18 +85,18 @@ public class Computer : MonoBehaviour
         Program program = new Program("SightTest_Program", this);
 
         MoveForward move1 = new MoveForward();
-        MoveBack move2 = new MoveBack();
-        IfSee sight = new IfSee("Player");
-
-        sight.AddNextCommand(sight);
-        sight.AddNextCommand(move1);
-
-        move1.AddNextCommand(move2);
-        move2.AddNextCommand(sight);
-
-        program.AddCommand(sight);
         program.AddCommand(move1);
+        MoveBack move2 = new MoveBack();
         program.AddCommand(move2);
+        IfSee ifSee = new IfSee("Player");
+        program.AddCommand(ifSee);
+
+        ifSee.SetIfFalse(ifSee);
+        ifSee.SetIfTrue(move1);
+
+        move1.SetNextCommand(move2);
+        move2.SetNextCommand(ifSee);
+
         return program;
     }
 

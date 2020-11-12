@@ -1,6 +1,6 @@
 {
     "parentComputer": {
-        "instanceID": 19152
+        "instanceID": 20100
     },
     "name": "SightTest_Program",
     "commands": [
@@ -24,19 +24,14 @@
             },
             "data": {
                 "parentComputer": {
-                    "instanceID": 19152
+                    "instanceID": 20100
                 },
                 "parentProgram": {
                     "id": 3
                 },
-                "nextCommands": [
-                    {
-                        "id": 0
-                    },
-                    {
-                        "id": 1
-                    }
-                ],
+                "nextCommand": {
+                    "id": 0
+                },
                 "tag": "Player"
             }
         },
@@ -48,16 +43,14 @@
             },
             "data": {
                 "parentComputer": {
-                    "instanceID": 19152
+                    "instanceID": 20100
                 },
                 "parentProgram": {
                     "id": 3
                 },
-                "nextCommands": [
-                    {
-                        "id": 2
-                    }
-                ],
+                "nextCommand": {
+                    "id": 2
+                },
                 "distance": 1.0
             }
         },
@@ -69,16 +62,14 @@
             },
             "data": {
                 "parentComputer": {
-                    "instanceID": 19152
+                    "instanceID": 20100
                 },
                 "parentProgram": {
                     "id": 3
                 },
-                "nextCommands": [
-                    {
-                        "id": 0
-                    }
-                ],
+                "nextCommand": {
+                    "id": 0
+                },
                 "distance": 1.0
             }
         },
@@ -90,7 +81,7 @@
             },
             "data": {
                 "parentComputer": {
-                    "instanceID": 19152
+                    "instanceID": 20100
                 },
                 "name": "SightTest_Program",
                 "commands": [
