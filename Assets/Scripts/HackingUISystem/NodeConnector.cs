@@ -57,7 +57,7 @@ public abstract class NodeConnector : EventTrigger
         }
         else
         {
-            Destroy(lineObject);
+            DestroyLine();
         }
 
         dragging = false;
@@ -75,6 +75,11 @@ public abstract class NodeConnector : EventTrigger
             }
         }
         return null;
+    }
+
+    public void DestroyLine()
+    {
+        Destroy(lineObject);
     }
 
 }

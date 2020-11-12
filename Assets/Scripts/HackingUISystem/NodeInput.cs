@@ -8,8 +8,11 @@ public class NodeInput : NodeConnector
 
     protected override void Disconnect()
     {
-        if(previousNodeInput)
+        if (previousNodeInput)
+        {
+            previousNodeInput.DestroyLine();
             previousNodeInput.nextNodeInput = null;
+        }
         previousNodeInput = null;
     }
 
