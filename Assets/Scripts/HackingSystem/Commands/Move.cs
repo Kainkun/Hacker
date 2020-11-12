@@ -6,6 +6,7 @@ public class Move : Next
 {
     public Vector2 directionToMove;
 
+    public Move() { }
     public Move(Vector2 direction)
     {
         directionToMove = direction;
@@ -14,6 +15,11 @@ public class Move : Next
     public override void Activate()
     {
         parentComputer.transform.Translate(directionToMove);
+    }
+
+    public void SetDirection(Vector2 direction)
+    {
+        directionToMove = direction;
     }
 }
 

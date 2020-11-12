@@ -2,10 +2,12 @@
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.UI.Extensions;
+using System;
 
-public class CommandNodeDragger : EventTrigger
+public abstract class CommandNodeDragger : EventTrigger
 {
-
+    public abstract Type AssociatedType();
+    public Command attachedCommand;
     private bool dragging;
     NodeConnector[] nodeConnectors;
     private void Awake()
@@ -37,4 +39,5 @@ public class CommandNodeDragger : EventTrigger
     {
         dragging = false;
     }
+
 }

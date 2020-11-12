@@ -17,6 +17,7 @@ public class Computer : MonoBehaviour
     private void Awake()
     {
         AddModules();
+        AddProgram(CreateTestProgram()); //create and add a test program. DONT USE programs.Add, it needs to handle parenting with AddProgram
     }
 
     void AddModules()
@@ -30,8 +31,7 @@ public class Computer : MonoBehaviour
 
     private void Start()
     {
-        AddProgram(CreateTestProgramSight()); //create and add a test program. DONT USE programs.Add, it needs to handle parenting with AddProgram
-        RunProgram(programs[0]);
+        
     }
 
     private void Update()
@@ -124,6 +124,10 @@ public class Computer : MonoBehaviour
     Coroutine runAttempt;
     Coroutine currentRunningProgram;
     bool runningProgram;
+    public void RunProgram(int i)
+    {
+        RunProgram(programs[i]);
+    }
     public void RunProgram(Program program) //if program is alreay running, stop it gracefully by waiting for it the finish its last command, then run the new program once its fully stopped
     {
         if(currentRunningProgram != null)
