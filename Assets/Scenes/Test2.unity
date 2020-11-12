@@ -846,7 +846,7 @@ GameObject:
   - component: {fileID: 457028852}
   - component: {fileID: 457028851}
   m_Layer: 5
-  m_Name: NextNodeTrue
+  m_Name: NodeOutputTrue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -880,10 +880,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 457028849}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1072e86df68dc2749b16d5a899b864a6, type: 3}
+  m_Script: {fileID: 11500000, guid: e3c18d8b6afa7d64f855c360cd7b2fd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delegates: []
+  nextNodeInput: {fileID: 0}
 --- !u!114 &457028852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1168,7 +1169,7 @@ GameObject:
   - component: {fileID: 581556754}
   - component: {fileID: 581556756}
   m_Layer: 5
-  m_Name: NextNode
+  m_Name: NodeOutputP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1240,10 +1241,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 581556752}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1072e86df68dc2749b16d5a899b864a6, type: 3}
+  m_Script: {fileID: 11500000, guid: e3c18d8b6afa7d64f855c360cd7b2fd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delegates: []
+  nextNodeInput: {fileID: 0}
 --- !u!1 &613062913
 GameObject:
   m_ObjectHideFlags: 0
@@ -1894,7 +1896,7 @@ GameObject:
   - component: {fileID: 814277087}
   - component: {fileID: 814277086}
   m_Layer: 5
-  m_Name: PreviousNode
+  m_Name: NodeInputIF
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1928,10 +1930,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 814277084}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1072e86df68dc2749b16d5a899b864a6, type: 3}
+  m_Script: {fileID: 11500000, guid: 357c96327c8fd084e832465e6358da41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delegates: []
+  previousNodeInput: {fileID: 0}
 --- !u!114 &814277087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2797,7 +2800,7 @@ GameObject:
   - component: {fileID: 1020190758}
   - component: {fileID: 1020190760}
   m_Layer: 5
-  m_Name: PreviousNode
+  m_Name: NodeInput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2869,10 +2872,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1020190756}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1072e86df68dc2749b16d5a899b864a6, type: 3}
+  m_Script: {fileID: 11500000, guid: 357c96327c8fd084e832465e6358da41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delegates: []
+  previousNodeInput: {fileID: 0}
 --- !u!1 &1043617347
 GameObject:
   m_ObjectHideFlags: 0
@@ -3974,7 +3978,7 @@ GameObject:
   - component: {fileID: 1637090213}
   - component: {fileID: 1637090212}
   m_Layer: 5
-  m_Name: NextNodeFalse
+  m_Name: NodeOutputFalse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4008,10 +4012,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1637090210}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1072e86df68dc2749b16d5a899b864a6, type: 3}
+  m_Script: {fileID: 11500000, guid: e3c18d8b6afa7d64f855c360cd7b2fd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delegates: []
+  nextNodeInput: {fileID: 0}
 --- !u!114 &1637090213
 MonoBehaviour:
   m_ObjectHideFlags: 0
