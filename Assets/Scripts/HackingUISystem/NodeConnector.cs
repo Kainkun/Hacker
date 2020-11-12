@@ -16,6 +16,9 @@ public abstract class NodeConnector : EventTrigger
     public Command parentCommand;
 
     protected abstract bool IsOppositeSlot(Component component);
+    protected abstract void SetUpConnection(NodeConnector component);
+    protected abstract void Disconnect();
+
 
     public void Update()
     {
@@ -30,6 +33,9 @@ public abstract class NodeConnector : EventTrigger
     public override void OnPointerDown(PointerEventData eventData)
     {
         dragging = true;
+
+        Disconnect();
+
         if (!line)
         {
             lineObject = new GameObject("Line Object", typeof(UILineRenderer));
@@ -47,6 +53,7 @@ public abstract class NodeConnector : EventTrigger
         {
             line.Points[1] = connection.transform.position - gameObject.transform.position;
             line.SetAllDirty();
+            SetUpConnection(connection);
         }
         else
         {
