@@ -73,9 +73,9 @@ public class Computer : MonoBehaviour
 
         //add the programs to the program's list of commands
         //TODO: maybe this can be combined with the creattion of a command?
-        program.AddCommand<Print>(print1);
-        program.AddCommand<Move>(move1);
-        program.AddCommand<Print>(print2);
+        program.AddCommand(print1);
+        program.AddCommand(move1);
+        program.AddCommand(print2);
 
         return program;
     }
@@ -94,9 +94,9 @@ public class Computer : MonoBehaviour
         move1.AddNextCommand(move2);
         move2.AddNextCommand(sight);
 
-        program.AddCommand<IfSee>(sight);
-        program.AddCommand<MoveForward>(move1);
-        program.AddCommand<MoveBack>(move2);
+        program.AddCommand(sight);
+        program.AddCommand(move1);
+        program.AddCommand(move2);
         return program;
     }
 

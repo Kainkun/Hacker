@@ -18,7 +18,7 @@ public class Program
     [SerializeReference]
     List<Command> commands = new List<Command>(); //list of commands that the program will be running
 
-    public void AddCommand<T>(T command) where T : Command
+    public void AddCommand(Command command)
     {
         command.parentComputer = parentComputer;
         command.parentProgram = this;
