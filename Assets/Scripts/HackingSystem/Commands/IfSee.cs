@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class IfSee : If
 {
+    [SerializeReference]
     public string tag;
 
     public IfSee() { }

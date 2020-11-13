@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Print : Next
 {
+    [SerializeReference]
     public string stringToPrint;
 
     public Print() { }

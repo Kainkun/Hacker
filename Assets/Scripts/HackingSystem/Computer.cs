@@ -30,7 +30,7 @@ public class Computer : MonoBehaviour
 
     private void Start()
     {
-        
+        //AddProgram(CreateTestProgramSight());
     }
 
     private void Update()
@@ -47,7 +47,7 @@ public class Computer : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            AddProgram(TxtToProgram("SightTest_Program.txt"));
+            AddProgram(TxtToProgram("UIMadeProgram.txt"));
         }
     }
 
@@ -155,7 +155,7 @@ public class Computer : MonoBehaviour
     {
         runningProgram = true;
         Command currentCommand = program.GetCommand(0);
-
+        print(currentCommand);
         while (runningProgram && currentCommand != null)
         {
             currentCommand.connectedNode?.ActivateIcon();

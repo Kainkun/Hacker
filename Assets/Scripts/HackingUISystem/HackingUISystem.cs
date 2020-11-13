@@ -28,9 +28,9 @@ public class HackingUISystem : MonoBehaviour
     {
 
         //TEMP
-        // currentlyEditingComputer = FindObjectOfType<Computer>();
-        // currentlyEditingProgram = new Program("UIMadeProgram", currentlyEditingComputer);
-        // currentlyEditingComputer.programs[0] = currentlyEditingProgram;
+        currentlyEditingComputer = FindObjectOfType<Computer>();
+        currentlyEditingProgram = new Program("UIMadeProgram", currentlyEditingComputer);
+        currentlyEditingComputer.AddProgram(currentlyEditingProgram);
     }
 
     private void Update()

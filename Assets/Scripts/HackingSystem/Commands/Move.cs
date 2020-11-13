@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Move : Next
 {
+    [SerializeReference]
     public Vector2 directionToMove;
 
     public Move() { }
@@ -25,6 +26,7 @@ public class Move : Next
 
 public abstract class MoveDirection : Next
 {
+    [SerializeReference]
     protected float distance;
     public abstract void SetDistance(float dist);
 

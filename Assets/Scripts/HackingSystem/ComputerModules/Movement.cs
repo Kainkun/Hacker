@@ -23,7 +23,7 @@ public class Movement : ComputerModule
     {
         float time = 0;
         Vector2 startPos = transform.position;
-        while(time < parentComputer.tickTime)
+        while (time < parentComputer.tickTime)
         {
             transform.position = Vector2.Lerp(startPos, position, time / parentComputer.tickTime);
             time += Time.deltaTime;

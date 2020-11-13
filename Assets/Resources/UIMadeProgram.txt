@@ -1,6 +1,6 @@
 {
     "parentComputer": {
-        "instanceID": 30334
+        "instanceID": 16182
     },
     "name": "UIMadeProgram",
     "commands": [
@@ -24,17 +24,18 @@
             },
             "data": {
                 "parentComputer": {
-                    "instanceID": 30334
+                    "instanceID": 16182
                 },
                 "parentProgram": {
                     "id": 3
                 },
                 "connectedNode": {
-                    "instanceID": -80584
+                    "instanceID": -8204
                 },
                 "nextCommand": {
                     "id": 1
-                }
+                },
+                "distance": 1.0
             }
         },
         "00000001": {
@@ -45,17 +46,18 @@
             },
             "data": {
                 "parentComputer": {
-                    "instanceID": 30334
+                    "instanceID": 16182
                 },
                 "parentProgram": {
                     "id": 3
                 },
                 "connectedNode": {
-                    "instanceID": -80626
+                    "instanceID": -8246
                 },
                 "nextCommand": {
                     "id": 2
-                }
+                },
+                "distance": 1.0
             }
         },
         "00000002": {
@@ -66,13 +68,13 @@
             },
             "data": {
                 "parentComputer": {
-                    "instanceID": 30334
+                    "instanceID": 16182
                 },
                 "parentProgram": {
                     "id": 3
                 },
                 "connectedNode": {
-                    "instanceID": -80666
+                    "instanceID": -8286
                 },
                 "nextCommand": {
                     "id": 4
@@ -94,7 +96,7 @@
             },
             "data": {
                 "parentComputer": {
-                    "instanceID": 30334
+                    "instanceID": 16182
                 },
                 "name": "UIMadeProgram",
                 "commands": [
