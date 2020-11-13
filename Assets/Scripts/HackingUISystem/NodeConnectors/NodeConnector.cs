@@ -21,13 +21,21 @@ public abstract class NodeConnector : EventTrigger
     public abstract NodeOutput GetOutputPair();
     public abstract void SetOppositePair(NodeConnector nodeConnector);
 
+    const int startIndex = 0;
+    const int endIndex = 3;
+    const int startHandle = 1;
+    const int endHandle = 2;
+    const float handleOffset = 100;
+
 
     public void Update()
     {
         if (dragging)
         {
             lineTarget = new Vector2(Input.mousePosition.x, Input.mousePosition.y) - (Vector2)gameObject.transform.position;
-            line.Points[1] = lineTarget;
+            line.Points[endIndex] = lineTarget;
+            line.Points[startHandle] = line.Points[startIndex] + new Vector2(handleOffset, 0);
+            line.Points[endHandle] = line.Points[endIndex] - new Vector2(handleOffset, 0);
             line.SetAllDirty();
         }
     }
@@ -48,7 +56,9 @@ public abstract class NodeConnector : EventTrigger
             lineObject.transform.SetParent(gameObject.transform);
             lineObject.transform.localPosition = Vector2.zero;
             line = lineObject.GetComponent<UILineRenderer>();
-            line.Points = new Vector2[2];
+            line.BezierMode = UILineRenderer.BezierType.Improved;
+            line.BezierSegmentsPerCurve = 20;
+            line.Points = new Vector2[4];
         }
     }
 
@@ -59,7 +69,7 @@ public abstract class NodeConnector : EventTrigger
         {
             SetUpConnection(connection);
             SetLinePositions();
-            //line.Points[1] = connection.transform.position - gameObject.transform.position;
+            //line.Points[endIndex] = connection.transform.position - gameObject.transform.position;
         }
         else
         {
@@ -159,26 +169,46 @@ public abstract class NodeConnector : EventTrigger
         {
             if (GetComponent<NodeOutput>())
             {
-                lineRenderer.Points[0] = Vector2.zero;
-                lineRenderer.Points[1] = GetOppositePair().transform.position - transform.position;
+                lineRenderer.Points[startIndex] = Vector2.zero;
+                lineRenderer.Points[endIndex] = GetOppositePair().transform.position - transform.position;
+
+                var xDist = lineRenderer.Points[endIndex].x - lineRenderer.Points[startIndex].x;
+                var tempHandleOffset = Mathf.Max(handleOffset, xDist/3);
+                lineRenderer.Points[startHandle] = lineRenderer.Points[startIndex] + new Vector2(tempHandleOffset, 0);
+                lineRenderer.Points[endHandle] = lineRenderer.Points[endIndex] - new Vector2(tempHandleOffset, 0);
             }
             else
             {
-                lineRenderer.Points[0] = GetOppositePair().transform.position - transform.position;
-                lineRenderer.Points[1] = Vector2.zero;
+                lineRenderer.Points[startIndex] = GetOppositePair().transform.position - transform.position;
+                lineRenderer.Points[endIndex] = Vector2.zero;
+
+                var xDist = lineRenderer.Points[endIndex].x - lineRenderer.Points[startIndex].x;
+                var tempHandleOffset = Mathf.Max(handleOffset, xDist/3);
+                lineRenderer.Points[startHandle] = lineRenderer.Points[startIndex] + new Vector2(tempHandleOffset, 0);
+                lineRenderer.Points[endHandle] = lineRenderer.Points[endIndex] - new Vector2(tempHandleOffset, 0);
             }
         }
         else
         {
             if (GetComponent<NodeOutput>())
             {
-                lineRenderer.Points[0] = transform.position - GetOppositePair().transform.position;
-                lineRenderer.Points[1] = Vector2.zero;
+                lineRenderer.Points[startIndex] = transform.position - GetOppositePair().transform.position;
+                lineRenderer.Points[endIndex] = Vector2.zero;
+
+                var xDist = lineRenderer.Points[endIndex].x - lineRenderer.Points[startIndex].x;
+                var tempHandleOffset = Mathf.Max(handleOffset, xDist/3);
+                lineRenderer.Points[startHandle] = lineRenderer.Points[startIndex] + new Vector2(tempHandleOffset, 0);
+                lineRenderer.Points[endHandle] = lineRenderer.Points[endIndex] - new Vector2(tempHandleOffset, 0);
             }
             else
             {
-                lineRenderer.Points[0] = Vector2.zero;
-                lineRenderer.Points[1] = transform.position - GetOppositePair().transform.position;
+                lineRenderer.Points[startIndex] = Vector2.zero;
+                lineRenderer.Points[endIndex] = transform.position - GetOppositePair().transform.position;
+
+                var xDist = lineRenderer.Points[endIndex].x - lineRenderer.Points[startIndex].x;
+                var tempHandleOffset = Mathf.Max(handleOffset, xDist/3);
+                lineRenderer.Points[startHandle] = lineRenderer.Points[startIndex] + new Vector2(tempHandleOffset, 0);
+                lineRenderer.Points[endHandle] = lineRenderer.Points[endIndex] - new Vector2(tempHandleOffset, 0);
             }
         }
 
