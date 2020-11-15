@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class IfNode : CommandNodeDragger
+public class IfNode : CommandNode
 {
     public override Type AssociatedType()
     {

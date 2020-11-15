@@ -9,7 +9,7 @@ public abstract class Command
     public Computer parentComputer;
     [SerializeReference]
     public Program parentProgram;
-    public CommandNodeDragger connectedNode;
+    public CommandNode connectedNode;
 
     //TODO: make sure theyre pointers to commands
     [SerializeReference]
@@ -21,7 +21,7 @@ public abstract class Command
         return nextCommand;
     }
 
-    public void SetConnectedNode(CommandNodeDragger node)
+    public void SetConnectedNode(CommandNode node)
     {
         connectedNode = node;
     }

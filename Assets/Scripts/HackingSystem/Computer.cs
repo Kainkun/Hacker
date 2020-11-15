@@ -35,20 +35,20 @@ public class Computer : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            RunProgram(programs[0]);
-        }
+        // if (Input.GetKeyDown(KeyCode.Alpha0))
+        // {
+        //     RunProgram(programs[0]);
+        // }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            ProgramToTxt(programs[0]); //Export the program as a JSON
-        }
+        // if (Input.GetKeyDown(KeyCode.Alpha1))
+        // {
+        //     ProgramToTxt(programs[0]); //Export the program as a JSON
+        // }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            AddProgram(TxtToProgram("UIMadeProgram.txt"));
-        }
+        // if (Input.GetKeyDown(KeyCode.Alpha2))
+        // {
+        //     AddProgram(TxtToProgram("UIMadeProgram.txt"));
+        // }
     }
 
     public void AddProgram(Program program)
@@ -155,7 +155,6 @@ public class Computer : MonoBehaviour
     {
         runningProgram = true;
         Command currentCommand = program.GetCommand(0);
-        print(currentCommand);
         while (runningProgram && currentCommand != null)
         {
             currentCommand.connectedNode?.ActivateIcon();

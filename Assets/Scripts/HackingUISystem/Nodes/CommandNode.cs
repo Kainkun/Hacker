@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.UI.Extensions;
 using System;
 
-public abstract class CommandNodeDragger : EventTrigger
+public abstract class CommandNode : EventTrigger
 {
     public abstract Type AssociatedType();
     public Command attachedCommand;

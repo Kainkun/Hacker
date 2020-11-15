@@ -13,7 +13,7 @@ public abstract class NodeConnector : EventTrigger
     GameObject lineObject;
     UILineRenderer line;
 
-    public CommandNodeDragger parentNode;
+    public CommandNode parentNode;
 
     protected abstract bool IsOppositeSlot(Component component);
     public abstract NodeConnector GetOppositePair();
@@ -25,7 +25,6 @@ public abstract class NodeConnector : EventTrigger
     const int endIndex = 3;
     const int startHandle = 1;
     const int endHandle = 2;
-    const float handleOffset = 100;
 
 
     public void Update()
@@ -34,8 +33,11 @@ public abstract class NodeConnector : EventTrigger
         {
             lineTarget = new Vector2(Input.mousePosition.x, Input.mousePosition.y) - (Vector2)gameObject.transform.position;
             line.Points[endIndex] = lineTarget;
-            line.Points[startHandle] = line.Points[startIndex] + new Vector2(handleOffset, 0);
-            line.Points[endHandle] = line.Points[endIndex] - new Vector2(handleOffset, 0);
+            var xDist = line.Points[endIndex].x - line.Points[startIndex].x;
+            var tempHandleOffset = xDist / 3;
+            line.Points[startHandle] = line.Points[startIndex] + new Vector2(tempHandleOffset, 0);
+            line.Points[endHandle] = line.Points[endIndex] - new Vector2(tempHandleOffset, 0);
+
             line.SetAllDirty();
         }
     }
@@ -173,7 +175,7 @@ public abstract class NodeConnector : EventTrigger
                 lineRenderer.Points[endIndex] = GetOppositePair().transform.position - transform.position;
 
                 var xDist = lineRenderer.Points[endIndex].x - lineRenderer.Points[startIndex].x;
-                var tempHandleOffset = Mathf.Max(handleOffset, xDist/3);
+                var tempHandleOffset = xDist / 3;
                 lineRenderer.Points[startHandle] = lineRenderer.Points[startIndex] + new Vector2(tempHandleOffset, 0);
                 lineRenderer.Points[endHandle] = lineRenderer.Points[endIndex] - new Vector2(tempHandleOffset, 0);
             }
@@ -183,7 +185,7 @@ public abstract class NodeConnector : EventTrigger
                 lineRenderer.Points[endIndex] = Vector2.zero;
 
                 var xDist = lineRenderer.Points[endIndex].x - lineRenderer.Points[startIndex].x;
-                var tempHandleOffset = Mathf.Max(handleOffset, xDist/3);
+                var tempHandleOffset = xDist / 3;
                 lineRenderer.Points[startHandle] = lineRenderer.Points[startIndex] + new Vector2(tempHandleOffset, 0);
                 lineRenderer.Points[endHandle] = lineRenderer.Points[endIndex] - new Vector2(tempHandleOffset, 0);
             }
@@ -196,7 +198,7 @@ public abstract class NodeConnector : EventTrigger
                 lineRenderer.Points[endIndex] = Vector2.zero;
 
                 var xDist = lineRenderer.Points[endIndex].x - lineRenderer.Points[startIndex].x;
-                var tempHandleOffset = Mathf.Max(handleOffset, xDist/3);
+                var tempHandleOffset = xDist / 3;
                 lineRenderer.Points[startHandle] = lineRenderer.Points[startIndex] + new Vector2(tempHandleOffset, 0);
                 lineRenderer.Points[endHandle] = lineRenderer.Points[endIndex] - new Vector2(tempHandleOffset, 0);
             }
@@ -206,7 +208,7 @@ public abstract class NodeConnector : EventTrigger
                 lineRenderer.Points[endIndex] = transform.position - GetOppositePair().transform.position;
 
                 var xDist = lineRenderer.Points[endIndex].x - lineRenderer.Points[startIndex].x;
-                var tempHandleOffset = Mathf.Max(handleOffset, xDist/3);
+                var tempHandleOffset = xDist / 3;
                 lineRenderer.Points[startHandle] = lineRenderer.Points[startIndex] + new Vector2(tempHandleOffset, 0);
                 lineRenderer.Points[endHandle] = lineRenderer.Points[endIndex] - new Vector2(tempHandleOffset, 0);
             }

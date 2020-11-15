@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class PrintNode : CommandNodeDragger
+public class PrintNode : CommandNode
 {
     public override Type AssociatedType()
     {

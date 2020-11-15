@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class MoveDirectionNode : CommandNodeDragger
+public class MoveDirectionNode : CommandNode
 {
     public override Type AssociatedType()
     {

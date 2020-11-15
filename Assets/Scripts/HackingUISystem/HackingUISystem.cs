@@ -11,7 +11,7 @@ public class HackingUISystem : MonoBehaviour
 
     public Computer currentlyEditingComputer;
     public Program currentlyEditingProgram;
-    public List<CommandNodeDragger> nodes = new List<CommandNodeDragger>();
+    public List<CommandNode> nodes = new List<CommandNode>();
 
     public GameObject PrintNode;
     public GameObject MoveForwardNode;
@@ -36,34 +36,34 @@ public class HackingUISystem : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            currentlyEditingComputer.RunProgram(0);
-        }
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            CreateNode(typeof(Print));
-        }
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            CreateNode(typeof(MoveForward));
-        }
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            CreateNode(typeof(MoveRight));
-        }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            CreateNode(typeof(MoveBack));
-        }
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            CreateNode(typeof(MoveLeft));
-        }
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            CreateNode(typeof(IfSee));
-        }
+        // if (Input.GetKeyDown(KeyCode.Space))
+        // {
+        //     currentlyEditingComputer.RunProgram(0);
+        // }
+        // if (Input.GetKeyDown(KeyCode.N))
+        // {
+        //     CreateNode(typeof(Print));
+        // }
+        // if (Input.GetKeyDown(KeyCode.UpArrow))
+        // {
+        //     CreateNode(typeof(MoveForward));
+        // }
+        // if (Input.GetKeyDown(KeyCode.RightArrow))
+        // {
+        //     CreateNode(typeof(MoveRight));
+        // }
+        // if (Input.GetKeyDown(KeyCode.DownArrow))
+        // {
+        //     CreateNode(typeof(MoveBack));
+        // }
+        // if (Input.GetKeyDown(KeyCode.LeftArrow))
+        // {
+        //     CreateNode(typeof(MoveLeft));
+        // }
+        // if (Input.GetKeyDown(KeyCode.I))
+        // {
+        //     CreateNode(typeof(IfSee));
+        // }
 
     }
 
@@ -111,6 +111,17 @@ public class HackingUISystem : MonoBehaviour
 
     }
 
+    public void CreateNode(GameObject nodePrefab)
+    {
+        GameObject nodeObject = Instantiate(nodePrefab, transform);
+        CommandNode node = nodeObject.GetComponent<CommandNode>();
+        Command command = currentlyEditingProgram.CreateCommand(node.AssociatedType());
+
+        nodes.Add(node);
+        node.attachedCommand = command;
+        command.SetConnectedNode(node);
+    }
+
     public Command CreateNode(Type type)
     {
 
@@ -134,6 +145,11 @@ public class HackingUISystem : MonoBehaviour
         nodes[nodes.Count-1].attachedCommand = command;
         command.SetConnectedNode(nodes[nodes.Count - 1]);
         return command;
+    }
+
+    public void RunProgram(int programIndex = 0)
+    {
+        currentlyEditingComputer.RunProgram(programIndex);
     }
 
 
