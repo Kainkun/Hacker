@@ -61,7 +61,7 @@ public abstract class CommandNode : EventTrigger
         foreach (var nodeConnector in nodeConnectors)
             nodeConnector.Disconnect();
 
-        HackingUISystem.instance.currentlyEditingProgram.RemoveCommand(attachedCommand);
+        HackingUISystem.instance.GetCurrentlyEditingProgram().RemoveCommand(attachedCommand);
         HackingUISystem.instance.nodes.Remove(this);
         Destroy(gameObject);
     }

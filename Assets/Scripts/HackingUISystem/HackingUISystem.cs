@@ -9,8 +9,8 @@ public class HackingUISystem : MonoBehaviour
 
     public GameObject trashBin;
 
-    public Computer currentlyEditingComputer;
-    public Program currentlyEditingProgram;
+    Computer currentlyEditingComputer;
+    Program currentlyEditingProgram;
     public List<CommandNode> nodes = new List<CommandNode>();
 
     public GameObject PrintNode;
@@ -28,10 +28,6 @@ public class HackingUISystem : MonoBehaviour
     private void Start()
     {
 
-        //TEMP
-        currentlyEditingComputer = FindObjectOfType<Computer>();
-        currentlyEditingProgram = new Program("UIMadeProgram", currentlyEditingComputer);
-        currentlyEditingComputer.AddProgram(currentlyEditingProgram);
     }
 
     private void Update()
@@ -67,14 +63,41 @@ public class HackingUISystem : MonoBehaviour
 
     }
 
+    public Computer GetCurrentlyEditingComputer()
+    {
+        return currentlyEditingComputer;
+    }
+
+    public Program GetCurrentlyEditingProgram()
+    {
+        return currentlyEditingProgram;
+    }
+
     public void EditComputer(Computer computer)
     {
         currentlyEditingComputer = computer;
+        if (computer.programs.Count == 0)
+        {
+            EditProgram(new Program("DefaultProgram", currentlyEditingComputer));
+            currentlyEditingComputer.AddProgram(currentlyEditingProgram);
+        }
+        else
+        {
+            EditProgram(computer.programs[0]);
+        }
     }
 
     public void EditProgram(Program program)
     {
         currentlyEditingProgram = program;
+    }
+
+    public void CloseUI()
+    {
+        while(nodes.Count > 0)
+            nodes[0].DeleteNode();
+        currentlyEditingProgram = null;
+        currentlyEditingComputer = null;
     }
 
     public void DisplayProgram(Program prog)
@@ -102,11 +125,6 @@ public class HackingUISystem : MonoBehaviour
     }
 
     public void DisplayNode()
-    {
-
-    }
-
-    public void DeleteNode()
     {
 
     }
@@ -142,7 +160,7 @@ public class HackingUISystem : MonoBehaviour
         else if (type == typeof(IfSee))
             nodes.Add(Instantiate(IfSeeNode, transform).GetComponent<IfSeeNode>());
 
-        nodes[nodes.Count-1].attachedCommand = command;
+        nodes[nodes.Count - 1].attachedCommand = command;
         command.SetConnectedNode(nodes[nodes.Count - 1]);
         return command;
     }
