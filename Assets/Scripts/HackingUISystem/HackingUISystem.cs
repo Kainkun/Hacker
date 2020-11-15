@@ -7,11 +7,12 @@ public class HackingUISystem : MonoBehaviour
 {
     public static HackingUISystem instance;
 
-    static Computer currentlyEditingComputer;
-    static Program currentlyEditingProgram;
-    List<CommandNodeDragger> nodes = new List<CommandNodeDragger>();
+    public GameObject trashBin;
 
-    public GameObject genericCommandNode;
+    public Computer currentlyEditingComputer;
+    public Program currentlyEditingProgram;
+    public List<CommandNodeDragger> nodes = new List<CommandNodeDragger>();
+
     public GameObject PrintNode;
     public GameObject MoveForwardNode;
     public GameObject MoveBackNode;
@@ -86,16 +87,16 @@ public class HackingUISystem : MonoBehaviour
 
         foreach (var command in prog.GetCommands())
         {
-            GameObject node = Instantiate(genericCommandNode, transform);
-            Command c = currentlyEditingProgram.CreateCommand(command.GetType());
-            node.transform.position = currentPos;
+            // GameObject node = Instantiate(genericCommandNode, transform);
+            // Command c = currentlyEditingProgram.CreateCommand(command.GetType());
+            // node.transform.position = currentPos;
 
-            currentPos.y -= yInc;
-            if (currentPos.y < yInc / 2)
-            {
-                currentPos.y = height - yInc / 2;
-                currentPos.x += xInc;
-            }
+            // currentPos.y -= yInc;
+            // if (currentPos.y < yInc / 2)
+            // {
+            //     currentPos.y = height - yInc / 2;
+            //     currentPos.x += xInc;
+            // }
         }
 
     }
@@ -117,8 +118,8 @@ public class HackingUISystem : MonoBehaviour
 
         if (type == typeof(Print))
             nodes.Add(Instantiate(PrintNode, transform).GetComponent<PrintNode>());
-        else if (type == typeof(Move))
-            nodes.Add(Instantiate(genericCommandNode, transform).GetComponent<MoveNode>());
+        // else if (type == typeof(Move))
+        //     nodes.Add(Instantiate(genericCommandNode, transform).GetComponent<MoveNode>());
         else if (type == typeof(MoveForward))
             nodes.Add(Instantiate(MoveForwardNode, transform).GetComponent<MoveForwardNode>());
         else if (type == typeof(MoveBack))

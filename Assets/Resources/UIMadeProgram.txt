@@ -1,6 +1,6 @@
 {
     "parentComputer": {
-        "instanceID": 16182
+        "instanceID": 20618
     },
     "name": "UIMadeProgram",
     "commands": [
@@ -12,55 +12,42 @@
         },
         {
             "id": 2
+        },
+        {
+            "id": 3
+        },
+        {
+            "id": 4
+        },
+        {
+            "id": 5
         }
     ],
     "references": {
         "version": 1,
         "00000000": {
             "type": {
-                "class": "MoveForward",
+                "class": "Print",
                 "ns": "",
                 "asm": "Assembly-CSharp"
             },
             "data": {
                 "parentComputer": {
-                    "instanceID": 16182
+                    "instanceID": 20618
                 },
                 "parentProgram": {
-                    "id": 3
+                    "id": 6
                 },
                 "connectedNode": {
-                    "instanceID": -8204
+                    "instanceID": -66910
                 },
                 "nextCommand": {
                     "id": 1
                 },
-                "distance": 1.0
+                "stringToPrint": "1"
             }
         },
         "00000001": {
-            "type": {
-                "class": "MoveBack",
-                "ns": "",
-                "asm": "Assembly-CSharp"
-            },
-            "data": {
-                "parentComputer": {
-                    "instanceID": 16182
-                },
-                "parentProgram": {
-                    "id": 3
-                },
-                "connectedNode": {
-                    "instanceID": -8246
-                },
-                "nextCommand": {
-                    "id": 2
-                },
-                "distance": 1.0
-            }
-        },
-        "00000002": {
             "type": {
                 "class": "IfSee",
                 "ns": "",
@@ -68,27 +55,115 @@
             },
             "data": {
                 "parentComputer": {
-                    "instanceID": 16182
+                    "instanceID": 20618
                 },
                 "parentProgram": {
-                    "id": 3
+                    "id": 6
                 },
                 "connectedNode": {
-                    "instanceID": -8286
+                    "instanceID": -67002
                 },
                 "nextCommand": {
-                    "id": 4
+                    "id": 7
                 },
                 "ifTrue": {
-                    "id": 0
-                },
-                "ifFalse": {
                     "id": 2
                 },
-                "tag": "Player"
+                "ifFalse": {
+                    "id": 4
+                },
+                "tag": ""
+            }
+        },
+        "00000002": {
+            "type": {
+                "class": "Print",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentComputer": {
+                    "instanceID": 20618
+                },
+                "parentProgram": {
+                    "id": 6
+                },
+                "connectedNode": {
+                    "instanceID": -67118
+                },
+                "nextCommand": {
+                    "id": 3
+                },
+                "stringToPrint": ""
             }
         },
         "00000003": {
+            "type": {
+                "class": "Print",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentComputer": {
+                    "instanceID": 20618
+                },
+                "parentProgram": {
+                    "id": 6
+                },
+                "connectedNode": {
+                    "instanceID": -67210
+                },
+                "nextCommand": {
+                    "id": 0
+                },
+                "stringToPrint": ""
+            }
+        },
+        "00000004": {
+            "type": {
+                "class": "Print",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentComputer": {
+                    "instanceID": 20618
+                },
+                "parentProgram": {
+                    "id": 6
+                },
+                "connectedNode": {
+                    "instanceID": -67302
+                },
+                "nextCommand": {
+                    "id": 5
+                },
+                "stringToPrint": ""
+            }
+        },
+        "00000005": {
+            "type": {
+                "class": "Print",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentComputer": {
+                    "instanceID": 20618
+                },
+                "parentProgram": {
+                    "id": 6
+                },
+                "connectedNode": {
+                    "instanceID": -67394
+                },
+                "nextCommand": {
+                    "id": 0
+                },
+                "stringToPrint": ""
+            }
+        },
+        "00000006": {
             "type": {
                 "class": "Program",
                 "ns": "",
@@ -96,7 +171,7 @@
             },
             "data": {
                 "parentComputer": {
-                    "instanceID": 16182
+                    "instanceID": 20618
                 },
                 "name": "UIMadeProgram",
                 "commands": [
@@ -108,11 +183,20 @@
                     },
                     {
                         "id": 2
+                    },
+                    {
+                        "id": 3
+                    },
+                    {
+                        "id": 4
+                    },
+                    {
+                        "id": 5
                     }
                 ]
             }
         },
-        "00000004": {
+        "00000007": {
             "type": {
                 "class": "",
                 "ns": "",
@@ -120,7 +204,7 @@
             },
             "data": {}
         },
-        "00000005": {
+        "00000008": {
             "type": {
                 "class": "Terminus",
                 "ns": "UnityEngine.DMAT",

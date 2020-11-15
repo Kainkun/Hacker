@@ -28,6 +28,11 @@ public class Program
         return command;
     }
 
+    public void RemoveCommand(Command command)
+    {
+        commands.Remove(command);
+    }
+
     public Command GetCommand(int i)
     {
         if (i < commands.Count)

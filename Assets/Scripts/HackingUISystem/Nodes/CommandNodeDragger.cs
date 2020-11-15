@@ -11,6 +11,7 @@ public abstract class CommandNodeDragger : EventTrigger
     private bool dragging;
     NodeConnector[] nodeConnectors;
     Image nodeIcon;
+
     private void Awake()
     {
         nodeIcon = GetComponent<Image>();
@@ -29,7 +30,7 @@ public abstract class CommandNodeDragger : EventTrigger
             foreach (var nodeConnector in nodeConnectors)
             {
                 UILineRenderer lineRenderer = nodeConnector.GetLineRenderer();
-                if(lineRenderer)
+                if (lineRenderer)
                     nodeConnector.SetLinePositions();
                 //lineRenderer.Points[1] = nodeConnector.transform.position;
             }
@@ -44,11 +45,25 @@ public abstract class CommandNodeDragger : EventTrigger
     public override void OnPointerUp(PointerEventData eventData)
     {
         dragging = false;
+
+        RectTransform trashBinRect = HackingUISystem.instance.trashBin.transform as RectTransform;
+        if(RectTransformUtility.RectangleContainsScreenPoint(trashBinRect, Input.mousePosition))
+            DeleteNode();
     }
 
     public void ActivateIcon(bool activate = true)
     {
         nodeIcon.color = activate ? Color.green : Color.white;
+    }
+
+    public void DeleteNode()
+    {
+        foreach (var nodeConnector in nodeConnectors)
+            nodeConnector.Disconnect();
+
+        HackingUISystem.instance.currentlyEditingProgram.RemoveCommand(attachedCommand);
+        HackingUISystem.instance.nodes.Remove(this);
+        Destroy(gameObject);
     }
 
 }
