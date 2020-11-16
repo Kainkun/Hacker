@@ -48,6 +48,7 @@ public abstract class NodeConnector : EventTrigger
         lineObject.transform.SetParent(gameObject.transform);
         lineObject.transform.localPosition = Vector2.zero;
         line = lineObject.GetComponent<UILineRenderer>();
+        line.rectTransform.sizeDelta = new Vector2(12,12);
         line.BezierMode = UILineRenderer.BezierType.Improved;
         line.BezierSegmentsPerCurve = 20;
         line.Points = new Vector2[4];
