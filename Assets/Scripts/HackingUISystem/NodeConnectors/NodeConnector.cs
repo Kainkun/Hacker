@@ -11,7 +11,7 @@ public abstract class NodeConnector : EventTrigger
     Vector2 lineTarget;
 
     GameObject lineObject;
-    protected UILineRenderer line;
+    UILineRenderer lineRenderer;
 
     public CommandNode parentNode;
 
@@ -32,13 +32,13 @@ public abstract class NodeConnector : EventTrigger
         if (dragging)
         {
             lineTarget = new Vector2(Input.mousePosition.x, Input.mousePosition.y) - (Vector2)gameObject.transform.position;
-            line.Points[endIndex] = lineTarget;
-            var xDist = line.Points[endIndex].x - line.Points[startIndex].x;
+            lineRenderer.Points[endIndex] = lineTarget;
+            var xDist = lineRenderer.Points[endIndex].x - lineRenderer.Points[startIndex].x;
             var tempHandleOffset = xDist / 3;
-            line.Points[startHandle] = line.Points[startIndex] + new Vector2(tempHandleOffset, 0);
-            line.Points[endHandle] = line.Points[endIndex] - new Vector2(tempHandleOffset, 0);
+            lineRenderer.Points[startHandle] = lineRenderer.Points[startIndex] + new Vector2(tempHandleOffset, 0);
+            lineRenderer.Points[endHandle] = lineRenderer.Points[endIndex] - new Vector2(tempHandleOffset, 0);
 
-            line.SetAllDirty();
+            lineRenderer.SetAllDirty();
         }
     }
 
@@ -47,11 +47,11 @@ public abstract class NodeConnector : EventTrigger
         lineObject = new GameObject("Line Object", typeof(UILineRenderer));
         lineObject.transform.SetParent(gameObject.transform);
         lineObject.transform.localPosition = Vector2.zero;
-        line = lineObject.GetComponent<UILineRenderer>();
-        line.rectTransform.sizeDelta = new Vector2(12,12);
-        line.BezierMode = UILineRenderer.BezierType.Improved;
-        line.BezierSegmentsPerCurve = 20;
-        line.Points = new Vector2[4];
+        lineRenderer = lineObject.GetComponent<UILineRenderer>();
+        lineRenderer.rectTransform.sizeDelta = new Vector2(12,12);
+        lineRenderer.BezierMode = UILineRenderer.BezierType.Improved;
+        lineRenderer.BezierSegmentsPerCurve = 20;
+        lineRenderer.Points = new Vector2[4];
     }
 
     protected void DrawLine()
@@ -59,13 +59,13 @@ public abstract class NodeConnector : EventTrigger
         if (GetOppositePair() == null)
             return;
 
-        line.Points[endIndex] = GetOppositePair().transform.position - transform.position;
-        var xDist = line.Points[endIndex].x - line.Points[startIndex].x;
+        lineRenderer.Points[endIndex] = GetOppositePair().transform.position - transform.position;
+        var xDist = lineRenderer.Points[endIndex].x - lineRenderer.Points[startIndex].x;
         var tempHandleOffset = xDist / 3;
-        line.Points[startHandle] = line.Points[startIndex] + new Vector2(tempHandleOffset, 0);
-        line.Points[endHandle] = line.Points[endIndex] - new Vector2(tempHandleOffset, 0);
+        lineRenderer.Points[startHandle] = lineRenderer.Points[startIndex] + new Vector2(tempHandleOffset, 0);
+        lineRenderer.Points[endHandle] = lineRenderer.Points[endIndex] - new Vector2(tempHandleOffset, 0);
 
-        line.SetAllDirty();
+        lineRenderer.SetAllDirty();
     }
 
     public override void OnPointerDown(PointerEventData eventData)
@@ -77,7 +77,7 @@ public abstract class NodeConnector : EventTrigger
             Disconnect();
         }
 
-        if (!line)
+        if (!lineRenderer)
         {
             CreateLine();
         }
@@ -189,17 +189,17 @@ public abstract class NodeConnector : EventTrigger
     {
         var oppositePair = GetOppositePair();
 
-        if (line)
-            return line;
-        else if (oppositePair && oppositePair.line)
-            return oppositePair.line;
+        if (lineRenderer)
+            return lineRenderer;
+        else if (oppositePair && oppositePair.lineRenderer)
+            return oppositePair.lineRenderer;
         else
             return null;
     }
 
     public void DestroyLine()
     {
-        line = null;
+        lineRenderer = null;
         Destroy(lineObject);
     }
 
@@ -208,7 +208,7 @@ public abstract class NodeConnector : EventTrigger
         //AAAAAAAA I GOT IT WORKING BUT I GIVE UP
         var lineRenderer = GetLineRenderer();
 
-        if (line)
+        if (this.lineRenderer)
         {
             if (GetComponent<NodeOutput>())
             {
