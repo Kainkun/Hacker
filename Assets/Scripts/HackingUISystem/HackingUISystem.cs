@@ -84,6 +84,7 @@ public class HackingUISystem : MonoBehaviour
         else
         {
             EditProgram(computer.programs[0]);
+            DisplayProgram(computer.programs[0]);
         }
     }
 
@@ -94,42 +95,22 @@ public class HackingUISystem : MonoBehaviour
 
     public void CloseUI()
     {
-        while(nodes.Count > 0)
-            nodes[0].DeleteNode();
+        while (nodes.Count > 0)
+            nodes[0].HideNode();
         currentlyEditingProgram = null;
         currentlyEditingComputer = null;
+        gameObject.SetActive(false);
     }
 
     public void DisplayProgram(Program prog)
     {
-        float yInc = 150;
-        float xInc = 300;
-        float height = Screen.height;
-        float width = Screen.width;
-        Vector2 currentPos = new Vector2(xInc / 2, height - yInc / 2);
-
         foreach (var command in prog.GetCommands())
-        {
-            // GameObject node = Instantiate(genericCommandNode, transform);
-            // Command c = currentlyEditingProgram.CreateCommand(command.GetType());
-            // node.transform.position = currentPos;
-
-            // currentPos.y -= yInc;
-            // if (currentPos.y < yInc / 2)
-            // {
-            //     currentPos.y = height - yInc / 2;
-            //     currentPos.x += xInc;
-            // }
-        }
-
+            DisplayCommandAsNode(command);
+        foreach (var node in nodes)
+            node.DisplayConnections();
     }
 
-    public void DisplayNode()
-    {
-
-    }
-
-    public void CreateNode(GameObject nodePrefab)
+    public CommandNode CreateNode(GameObject nodePrefab)
     {
         GameObject nodeObject = Instantiate(nodePrefab, transform);
         CommandNode node = nodeObject.GetComponent<CommandNode>();
@@ -138,32 +119,71 @@ public class HackingUISystem : MonoBehaviour
         nodes.Add(node);
         node.attachedCommand = command;
         command.SetConnectedNode(node);
+
+        return node;
     }
 
-    public Command CreateNode(Type type)
+    public CommandNode DisplayCommandAsNode(Command command)
     {
+        GameObject nodeObject = Instantiate(GetNodePrefab(command), transform);
+        CommandNode node = nodeObject.GetComponent<CommandNode>();
 
-        Command command = currentlyEditingProgram.CreateCommand(type);
+        nodes.Add(node);
+        node.attachedCommand = command;
+        command.SetConnectedNode(node);
 
-        if (type == typeof(Print))
-            nodes.Add(Instantiate(PrintNode, transform).GetComponent<PrintNode>());
-        // else if (type == typeof(Move))
-        //     nodes.Add(Instantiate(genericCommandNode, transform).GetComponent<MoveNode>());
-        else if (type == typeof(MoveForward))
-            nodes.Add(Instantiate(MoveForwardNode, transform).GetComponent<MoveForwardNode>());
-        else if (type == typeof(MoveBack))
-            nodes.Add(Instantiate(MoveBackNode, transform).GetComponent<MoveBackNode>());
-        else if (type == typeof(MoveLeft))
-            nodes.Add(Instantiate(MoveLeftNode, transform).GetComponent<MoveLeftNode>());
-        else if (type == typeof(MoveRight))
-            nodes.Add(Instantiate(MoveRightNode, transform).GetComponent<MoveRightNode>());
-        else if (type == typeof(IfSee))
-            nodes.Add(Instantiate(IfSeeNode, transform).GetComponent<IfSeeNode>());
+        node.transform.localPosition = command.connectedNodePosition;
 
-        nodes[nodes.Count - 1].attachedCommand = command;
-        command.SetConnectedNode(nodes[nodes.Count - 1]);
-        return command;
+        return node;
     }
+
+    public void CreateNodeButton(GameObject nodePrefab)
+    {
+        CreateNode(nodePrefab);
+    }
+
+    GameObject GetNodePrefab(Command command)
+    {
+        if (command is Print)
+            return PrintNode;
+        else if (command is MoveForward)
+            return MoveForwardNode;
+        else if (command is MoveBack)
+            return MoveBackNode;
+        else if (command is MoveRight)
+            return MoveRightNode;
+        else if (command is MoveLeft)
+            return MoveLeftNode;
+        else if (command is IfSee)
+            return IfSeeNode;
+
+        return null;
+    }
+
+    // public Command CreateNode(Type type)
+    // {
+
+    //     Command command = currentlyEditingProgram.CreateCommand(type);
+
+    //     if (type == typeof(Print))
+    //         nodes.Add(Instantiate(PrintNode, transform).GetComponent<PrintNode>());
+    //     // else if (type == typeof(Move))
+    //     //     nodes.Add(Instantiate(genericCommandNode, transform).GetComponent<MoveNode>());
+    //     else if (type == typeof(MoveForward))
+    //         nodes.Add(Instantiate(MoveForwardNode, transform).GetComponent<MoveForwardNode>());
+    //     else if (type == typeof(MoveBack))
+    //         nodes.Add(Instantiate(MoveBackNode, transform).GetComponent<MoveBackNode>());
+    //     else if (type == typeof(MoveLeft))
+    //         nodes.Add(Instantiate(MoveLeftNode, transform).GetComponent<MoveLeftNode>());
+    //     else if (type == typeof(MoveRight))
+    //         nodes.Add(Instantiate(MoveRightNode, transform).GetComponent<MoveRightNode>());
+    //     else if (type == typeof(IfSee))
+    //         nodes.Add(Instantiate(IfSeeNode, transform).GetComponent<IfSeeNode>());
+
+    //     nodes[nodes.Count - 1].attachedCommand = command;
+    //     command.SetConnectedNode(nodes[nodes.Count - 1]);
+    //     return command;
+    // }
 
     public void RunProgram(int programIndex = 0)
     {

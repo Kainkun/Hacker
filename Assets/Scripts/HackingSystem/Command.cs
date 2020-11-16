@@ -10,6 +10,8 @@ public abstract class Command
     [SerializeReference]
     public Program parentProgram;
     public CommandNode connectedNode;
+    [SerializeReference]
+    public Vector2 connectedNodePosition;
 
     //TODO: make sure theyre pointers to commands
     [SerializeReference]

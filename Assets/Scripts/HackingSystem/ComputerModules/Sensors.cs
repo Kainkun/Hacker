@@ -15,7 +15,6 @@ public class Sensors : ComputerModule
         float time = 0;
         while (time < parentComputer.tickTime)
         {
-            print("wtf");
             if (LookForObjectWithTag(tag))
             {
                 callback(true);

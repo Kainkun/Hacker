@@ -37,11 +37,6 @@ public class Player : MonoBehaviour
                     HackingUISystem.instance.EditComputer(closestComputer);
                 }
             }
-            else
-            {
-                HackingUISystem.instance.CloseUI();
-                HackingUICanvas.SetActive(false);
-            }
         }
 
     }

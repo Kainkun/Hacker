@@ -11,7 +11,7 @@ public abstract class NodeConnector : EventTrigger
     Vector2 lineTarget;
 
     GameObject lineObject;
-    UILineRenderer line;
+    protected UILineRenderer line;
 
     public CommandNode parentNode;
 
@@ -31,15 +31,30 @@ public abstract class NodeConnector : EventTrigger
     {
         if (dragging)
         {
-            lineTarget = new Vector2(Input.mousePosition.x, Input.mousePosition.y) - (Vector2)gameObject.transform.position;
-            line.Points[endIndex] = lineTarget;
-            var xDist = line.Points[endIndex].x - line.Points[startIndex].x;
-            var tempHandleOffset = xDist / 3;
-            line.Points[startHandle] = line.Points[startIndex] + new Vector2(tempHandleOffset, 0);
-            line.Points[endHandle] = line.Points[endIndex] - new Vector2(tempHandleOffset, 0);
-
-            line.SetAllDirty();
+            DrawLine();
         }
+    }
+
+    protected void CreateLine()
+    {
+        lineObject = new GameObject("Line Object", typeof(UILineRenderer));
+        lineObject.transform.SetParent(gameObject.transform);
+        lineObject.transform.localPosition = Vector2.zero;
+        line = lineObject.GetComponent<UILineRenderer>();
+        line.BezierMode = UILineRenderer.BezierType.Improved;
+        line.BezierSegmentsPerCurve = 20;
+        line.Points = new Vector2[4];
+    }
+
+    protected void DrawLine()
+    {
+        line.Points[endIndex] = GetOppositePair().transform.position - transform.position;
+        var xDist = line.Points[endIndex].x - line.Points[startIndex].x;
+        var tempHandleOffset = xDist / 3;
+        line.Points[startHandle] = line.Points[startIndex] + new Vector2(tempHandleOffset, 0);
+        line.Points[endHandle] = line.Points[endIndex] - new Vector2(tempHandleOffset, 0);
+
+        line.SetAllDirty();
     }
 
     public override void OnPointerDown(PointerEventData eventData)
@@ -54,13 +69,7 @@ public abstract class NodeConnector : EventTrigger
 
         if (!line)
         {
-            lineObject = new GameObject("Line Object", typeof(UILineRenderer));
-            lineObject.transform.SetParent(gameObject.transform);
-            lineObject.transform.localPosition = Vector2.zero;
-            line = lineObject.GetComponent<UILineRenderer>();
-            line.BezierMode = UILineRenderer.BezierType.Improved;
-            line.BezierSegmentsPerCurve = 20;
-            line.Points = new Vector2[4];
+            CreateLine();
         }
     }
 
@@ -103,6 +112,7 @@ public abstract class NodeConnector : EventTrigger
         }
     }
 
+
     public void Disconnect()
     {
         if (!GetOppositePair())
@@ -123,7 +133,14 @@ public abstract class NodeConnector : EventTrigger
                 Debug.LogError("Node Output. Needs to be true or false based");
         }
 
-        //Disconnect Nodes
+        Hide();
+    }
+
+    public void Hide()
+    {
+        if (!GetOppositePair())
+            return;
+
         if (GetOppositePair())
         {
             GetOppositePair().DestroyLine();

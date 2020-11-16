@@ -40,15 +40,15 @@ public class Computer : MonoBehaviour
         //     RunProgram(programs[0]);
         // }
 
-        // if (Input.GetKeyDown(KeyCode.Alpha1))
-        // {
-        //     ProgramToTxt(programs[0]); //Export the program as a JSON
-        // }
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            ProgramToTxt(programs[0]); //Export the program as a JSON
+        }
 
-        // if (Input.GetKeyDown(KeyCode.Alpha2))
-        // {
-        //     AddProgram(TxtToProgram("UIMadeProgram.txt"));
-        // }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            AddProgram(TxtToProgram("DefaultProgram.txt"));
+        }
     }
 
     public void AddProgram(Program program)

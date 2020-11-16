@@ -1,0 +1,208 @@
+{
+    "parentComputer": {
+        "instanceID": 20618
+    },
+    "name": "DefaultProgram",
+    "commands": [
+        {
+            "id": 0
+        },
+        {
+            "id": 1
+        },
+        {
+            "id": 2
+        },
+        {
+            "id": 3
+        },
+        {
+            "id": 4
+        }
+    ],
+    "references": {
+        "version": 1,
+        "00000000": {
+            "type": {
+                "class": "Print",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentComputer": {
+                    "instanceID": 20618
+                },
+                "parentProgram": {
+                    "id": 5
+                },
+                "connectedNode": {
+                    "instanceID": -126796
+                },
+                "connectedNodePosition": {
+                    "x": -240.58990478515626,
+                    "y": 15.168575286865235
+                },
+                "nextCommand": {
+                    "id": 1
+                },
+                "stringToPrint": "start"
+            }
+        },
+        "00000001": {
+            "type": {
+                "class": "IfSee",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentComputer": {
+                    "instanceID": 20618
+                },
+                "parentProgram": {
+                    "id": 5
+                },
+                "connectedNode": {
+                    "instanceID": -126888
+                },
+                "connectedNodePosition": {
+                    "x": -125.983154296875,
+                    "y": 16.853967666625978
+                },
+                "nextCommand": {
+                    "id": 6
+                },
+                "ifTrue": {
+                    "id": 2
+                },
+                "ifFalse": {
+                    "id": 3
+                },
+                "tag": "Player"
+            }
+        },
+        "00000002": {
+            "type": {
+                "class": "MoveForward",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentComputer": {
+                    "instanceID": 20618
+                },
+                "parentProgram": {
+                    "id": 5
+                },
+                "connectedNode": {
+                    "instanceID": -127010
+                },
+                "connectedNodePosition": {
+                    "x": 50.14045333862305,
+                    "y": 64.04498291015625
+                },
+                "nextCommand": {
+                    "id": 4
+                },
+                "distance": 1.0
+            }
+        },
+        "00000003": {
+            "type": {
+                "class": "MoveBack",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentComputer": {
+                    "instanceID": 20618
+                },
+                "parentProgram": {
+                    "id": 5
+                },
+                "connectedNode": {
+                    "instanceID": -127060
+                },
+                "connectedNodePosition": {
+                    "x": 44.2415771484375,
+                    "y": -51.40446472167969
+                },
+                "nextCommand": {
+                    "id": 4
+                },
+                "distance": 1.0
+            }
+        },
+        "00000004": {
+            "type": {
+                "class": "Print",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentComputer": {
+                    "instanceID": 20618
+                },
+                "parentProgram": {
+                    "id": 5
+                },
+                "connectedNode": {
+                    "instanceID": -127110
+                },
+                "connectedNodePosition": {
+                    "x": -48.45505905151367,
+                    "y": 146.62925720214845
+                },
+                "nextCommand": {
+                    "id": 1
+                },
+                "stringToPrint": "loop"
+            }
+        },
+        "00000005": {
+            "type": {
+                "class": "Program",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentComputer": {
+                    "instanceID": 20618
+                },
+                "name": "DefaultProgram",
+                "commands": [
+                    {
+                        "id": 0
+                    },
+                    {
+                        "id": 1
+                    },
+                    {
+                        "id": 2
+                    },
+                    {
+                        "id": 3
+                    },
+                    {
+                        "id": 4
+                    }
+                ]
+            }
+        },
+        "00000006": {
+            "type": {
+                "class": "",
+                "ns": "",
+                "asm": ""
+            },
+            "data": {}
+        },
+        "00000007": {
+            "type": {
+                "class": "Terminus",
+                "ns": "UnityEngine.DMAT",
+                "asm": "FAKE_ASM"
+            },
+            "data": {}
+        }
+    }
+}
