@@ -15,10 +15,9 @@ public abstract class NodeConnector : EventTrigger
     public CommandNode parentNode;
 
     protected abstract bool IsOppositeSlot(Component component);
-    public abstract NodeConnector GetOppositePair();
-    public abstract NodeInput GetInputPair();
-    public abstract NodeOutput GetOutputPair();
-    public abstract void SetOppositePair(NodeConnector nodeConnector);
+    public abstract bool HasOppositePair();
+    public abstract NodeInput GetInputConnector();
+    public abstract List<NodeOutput> GetOutputConnectors();
 
     const int startIndex = 0;
     const int endIndex = 3;
@@ -54,38 +53,66 @@ public abstract class NodeConnector : EventTrigger
         NodeConnector connection = GetConnection(eventData);
         if (connection)
         {
-            if (connection.GetOppositePair() != this)
+            if (this is NodeInput)
             {
-                if (connection is NodeOutput)
+                if (((NodeOutput)connection).GetOppositePair() != this)
                 {
                     connection.Disconnect();
-                }
 
-                SetUpConnection(connection);
-                CreateConnectedLine();
-                DrawConnectedLine();
+                    SetUpConnection(connection);
+                    CreateConnectedLine((NodeOutput)connection);
+                    DrawConnectedLines();
+                }
             }
+            else// this is NodeOutput
+            {
+                bool thisNotInList = true;
+                foreach (var item in ((NodeInput)connection).GetOppositePairs())
+                {
+                    if (item == this)
+                        thisNotInList = false;
+                }
+                if (thisNotInList)
+                {
+                    SetUpConnection(connection);
+                    CreateConnectedLine((NodeOutput)this);
+                    DrawConnectedLines();
+                }
+            }
+
         }
         dragging = false;
     }
 
     public void SetUpConnection(NodeConnector component)
     {
+        NodeOutput newNodeOutput = null;
+
         //Set up Node connections
-        SetOppositePair(component.GetComponent<NodeConnector>());
-        GetOppositePair().SetOppositePair(this);
+        if (this is NodeInput)
+        {
+            ((NodeInput)this).AddOppositePair(component);
+            newNodeOutput = (NodeOutput)component;
+            newNodeOutput.SetOppositePair(this);
+        }
+        else// this is NodeOutput
+        {
+            newNodeOutput = (NodeOutput)this;
+            newNodeOutput.SetOppositePair(component);
+            ((NodeInput)component).AddOppositePair(this);
+        }
 
         //Set up Command connections
-        if (GetOutputPair().parentNode.attachedCommand is Next)
+        if (newNodeOutput.parentNode.attachedCommand is Next)
         {
-            ((Next)GetOutputPair().parentNode.attachedCommand).SetNextCommand(GetInputPair().parentNode.attachedCommand);
+            ((Next)newNodeOutput.parentNode.attachedCommand).SetNextCommand(GetInputConnector().parentNode.attachedCommand);
         }
-        else if (GetOutputPair().parentNode.attachedCommand is If)
+        else if (newNodeOutput.parentNode.attachedCommand is If)
         {
-            if (GetOutputPair() is NodeOutputTrue)
-                ((If)GetOutputPair().parentNode.attachedCommand).SetIfTrue(GetInputPair().parentNode.attachedCommand);
-            else if (GetOutputPair() is NodeOutputFalse)
-                ((If)GetOutputPair().parentNode.attachedCommand).SetIfFalse(GetInputPair().parentNode.attachedCommand);
+            if (newNodeOutput is NodeOutputTrue)
+                ((If)newNodeOutput.parentNode.attachedCommand).SetIfTrue(GetInputConnector().parentNode.attachedCommand);
+            else if (newNodeOutput is NodeOutputFalse)
+                ((If)newNodeOutput.parentNode.attachedCommand).SetIfFalse(GetInputConnector().parentNode.attachedCommand);
             else
                 Debug.LogError("Node Output. Needs to be true or false based");
         }
@@ -94,49 +121,63 @@ public abstract class NodeConnector : EventTrigger
 
     public void Disconnect()
     {
-        if (!GetOppositePair())
+        if (!HasOppositePair())
             return;
 
-        //Disconnect Commands
-        if (GetOutputPair().parentNode.attachedCommand is Next)
+
+        if (this is NodeInput)
         {
-            ((Next)GetOutputPair().parentNode.attachedCommand).SetNextCommand(null);
+            foreach (var outputConnector in GetOutputConnectors())
+            {
+                DisconnectSingle(outputConnector);
+            }
         }
-        else if (GetOutputPair().parentNode.attachedCommand is If)
+        else// this is NodeOutput
         {
-            if (GetOutputPair() is NodeOutputTrue)
-                ((If)GetOutputPair().parentNode.attachedCommand).SetIfTrue(null);
-            else if (GetOutputPair() is NodeOutputFalse)
-                ((If)GetOutputPair().parentNode.attachedCommand).SetIfFalse(null);
+            DisconnectSingle((NodeOutput)this);
+        }
+
+
+        HideLines();
+    }
+
+    void DisconnectSingle(NodeOutput nodeOutput)
+    {
+        if (nodeOutput.parentNode.attachedCommand is Next)
+        {
+            ((Next)nodeOutput.parentNode.attachedCommand).SetNextCommand(null);
+        }
+        else if (nodeOutput.parentNode.attachedCommand is If)
+        {
+            if (nodeOutput is NodeOutputTrue)
+                ((If)nodeOutput.parentNode.attachedCommand).SetIfTrue(null);
+            else if (nodeOutput is NodeOutputFalse)
+                ((If)nodeOutput.parentNode.attachedCommand).SetIfFalse(null);
             else
                 Debug.LogError("Node Output. Needs to be true or false based");
         }
-
-        HideLine();
     }
 
-    public void HideLine()
+    public void HideLines()
     {
-        if (GetOutputPair())
+        if (this is NodeInput)
         {
-            GetOutputPair().DestroyLine();
+            if (GetOutputConnectors()?.Count > 0)
+            {
+                foreach (var outputConnector in GetOutputConnectors())
+                {
+                    outputConnector.DestroyLine();
+                    outputConnector.SetOppositePair(null);
+                }
+            }
+            ((NodeInput)this).RemoveAllOppositePairs();
         }
-        if(GetOppositePair())
+        else// this is NodeOutput
         {
-            GetOppositePair().SetOppositePair(null);
+            DestroyLine();
+            ((NodeOutput)this).GetOppositePair()?.RemoveOppositePair(this);
+            ((NodeOutput)this).SetOppositePair(null);
         }
-        SetOppositePair(null);
-
-        // if (!GetOppositePair())
-        //     return;
-
-        // if (GetOppositePair())
-        // {
-        //     DestroyLine();
-        //     GetOppositePair().DestroyLine();
-        //     GetOppositePair().SetOppositePair(null);
-        // }
-        // SetOppositePair(null);
     }
 
     NodeConnector GetConnection(PointerEventData eventData)
@@ -152,19 +193,23 @@ public abstract class NodeConnector : EventTrigger
         return null;
     }
 
-    public UILineRenderer GetConnectedLineRenderer()
+    public List<UILineRenderer> GetConnectedLineRenderers()
     {
-        if (GetOutputPair())
-            return GetOutputPair().lineRenderer;
-        return null;
-        // var oppositePair = GetOppositePair();
-
-        // if (lineObject?.GetComponent<UILineRenderer>())
-        //     return lineObject.GetComponent<UILineRenderer>();
-        // else if (oppositePair?.lineObject?.GetComponent<UILineRenderer>())
-        //     return oppositePair.lineObject.GetComponent<UILineRenderer>();
-        // else
-        //     return null;
+        var lineRenderers = new List<UILineRenderer>();
+        if (this is NodeInput)
+        {
+            foreach (var nodeOutput in GetOutputConnectors())
+            {
+                if (nodeOutput.lineRenderer)
+                    lineRenderers.Add(nodeOutput.lineRenderer);
+            }
+        }
+        else// this is NodeOutput
+        {
+            if (lineRenderer)
+                lineRenderers.Add(lineRenderer);
+        }
+        return lineRenderers;
     }
 
     void CreateMouseLine()
@@ -192,34 +237,33 @@ public abstract class NodeConnector : EventTrigger
         lineRenderer.SetAllDirty();
     }
 
-    protected void CreateConnectedLine()
+    protected void CreateConnectedLine(NodeOutput node)
     {
-        var output = GetOutputPair();
-
         var lineObject = new GameObject("Connected Line Object", typeof(UILineRenderer));
-        lineObject.transform.SetParent(output.transform);
+        lineObject.transform.SetParent(node.transform);
         lineObject.transform.localPosition = Vector2.zero;
-        output.lineRenderer = lineObject.GetComponent<UILineRenderer>();
+        node.lineRenderer = lineObject.GetComponent<UILineRenderer>();
 
-        output.lineRenderer.rectTransform.sizeDelta = new Vector2(12, 12);
-        output.lineRenderer.BezierMode = UILineRenderer.BezierType.Improved;
-        output.lineRenderer.BezierSegmentsPerCurve = 20;
-        output.lineRenderer.Points = new Vector2[4];
+        node.lineRenderer.rectTransform.sizeDelta = new Vector2(12, 12);
+        node.lineRenderer.BezierMode = UILineRenderer.BezierType.Improved;
+        node.lineRenderer.BezierSegmentsPerCurve = 20;
+        node.lineRenderer.Points = new Vector2[4];
     }
 
-    public void DrawConnectedLine()
+    public void DrawConnectedLines()
     {
-        var outputLineRenderer = GetConnectedLineRenderer();
+        foreach (var lineRenderer in GetConnectedLineRenderers())
+        {
+            lineRenderer.Points[startIndex] = Vector2.zero;
+            lineRenderer.Points[endIndex] = GetInputConnector().transform.position - lineRenderer.transform.position;
 
-        outputLineRenderer.Points[startIndex] = Vector2.zero;
-        outputLineRenderer.Points[endIndex] = GetInputPair().transform.position - GetOutputPair().transform.position;
+            var xDist = lineRenderer.Points[endIndex].x - lineRenderer.Points[startIndex].x;
+            var tempHandleOffset = xDist / 3;
+            lineRenderer.Points[startHandle] = lineRenderer.Points[startIndex] + new Vector2(tempHandleOffset, 0);
+            lineRenderer.Points[endHandle] = lineRenderer.Points[endIndex] - new Vector2(tempHandleOffset, 0);
 
-        var xDist = outputLineRenderer.Points[endIndex].x - outputLineRenderer.Points[startIndex].x;
-        var tempHandleOffset = xDist / 3;
-        outputLineRenderer.Points[startHandle] = outputLineRenderer.Points[startIndex] + new Vector2(tempHandleOffset, 0);
-        outputLineRenderer.Points[endHandle] = outputLineRenderer.Points[endIndex] - new Vector2(tempHandleOffset, 0);
-
-        outputLineRenderer.SetAllDirty();
+            lineRenderer.SetAllDirty();
+        }
     }
 
     public void DestroyLine()

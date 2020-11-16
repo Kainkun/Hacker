@@ -39,9 +39,7 @@ public abstract class CommandNode : EventTrigger
             attachedCommand.connectedNodePosition = transform.localPosition;
             foreach (var nodeConnector in nodeConnectors)
             {
-                if (nodeConnector.GetConnectedLineRenderer())
-                    nodeConnector.DrawConnectedLine();
-                //lineRenderer.Points[1] = nodeConnector.transform.position;
+                nodeConnector.DrawConnectedLines();
             }
         }
     }
@@ -87,7 +85,7 @@ public abstract class CommandNode : EventTrigger
     public void HideNode()
     {
         foreach (var nodeConnector in nodeConnectors)
-            nodeConnector.HideLine();
+            nodeConnector.HideLines();
 
         HackingUISystem.instance.nodes.Remove(this);
         Destroy(gameObject);

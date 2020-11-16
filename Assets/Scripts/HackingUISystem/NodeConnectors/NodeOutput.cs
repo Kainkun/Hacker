@@ -7,12 +7,20 @@ public class NodeOutput : NodeConnector
 {
     public NodeInput nextNodeInput;
 
-    public override NodeConnector GetOppositePair()
+    public override bool HasOppositePair()
+    {
+        if (nextNodeInput != null)
+            return true;
+
+        return false;
+    }
+
+    public NodeInput GetOppositePair()
     {
         return nextNodeInput;
     }
 
-    public override void SetOppositePair(NodeConnector nodeConnector)
+    public void SetOppositePair(NodeConnector nodeConnector)
     {
         if (nodeConnector == null)
             nextNodeInput = null;
@@ -30,14 +38,14 @@ public class NodeOutput : NodeConnector
         return false;
     }
 
-    public override NodeInput GetInputPair()
+    public override NodeInput GetInputConnector()
     {
-        return (NodeInput)GetOppositePair();
+        return nextNodeInput;
     }
 
-    public override NodeOutput GetOutputPair()
+    public override List<NodeOutput> GetOutputConnectors()
     {
-        return this;
+        return nextNodeInput.GetOutputConnectors();
     }
 
     public void DisplayConnection()
@@ -61,9 +69,9 @@ public class NodeOutput : NodeConnector
 
         if (GetOppositePair() != null)
         {
-            GetOppositePair().SetOppositePair(this);
-            CreateConnectedLine();
-            DrawConnectedLine();
+            GetOppositePair().AddOppositePair(this);
+            CreateConnectedLine(this);
+            DrawConnectedLines();
         }
     }
 }

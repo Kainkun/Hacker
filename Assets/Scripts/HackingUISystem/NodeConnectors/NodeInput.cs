@@ -5,18 +5,37 @@ using UnityEngine.UI.Extensions;
 
 public class NodeInput : NodeConnector
 {
-    public NodeOutput previousNodeInput;
-    public override NodeConnector GetOppositePair()
+    public List<NodeOutput> previousNodeOutputs;
+
+    public override bool HasOppositePair()
     {
-        return previousNodeInput;
+        if (previousNodeOutputs?.Count > 0)
+            return true;
+
+        return false;
     }
 
-    public override void SetOppositePair(NodeConnector nodeConnector)
+    public List<NodeOutput> GetOppositePairs()
     {
-        if(nodeConnector == null)
-            previousNodeInput = null;
+        return previousNodeOutputs;
+    }
+
+    public void AddOppositePair(NodeConnector nodeConnector)
+    {
+        if (nodeConnector == null)
+            return;
         else
-            previousNodeInput = nodeConnector.GetComponent<NodeOutput>();
+            previousNodeOutputs.Add(nodeConnector.GetComponent<NodeOutput>());
+    }
+
+    public void RemoveOppositePair(NodeConnector nodeConnector)
+    {
+        previousNodeOutputs.Remove((NodeOutput)nodeConnector);
+    }
+
+    public void RemoveAllOppositePairs()
+    {
+        previousNodeOutputs = null;
     }
 
     protected override bool IsOppositeSlot(Component component)
@@ -29,13 +48,14 @@ public class NodeInput : NodeConnector
         return false;
     }
 
-    public override NodeInput GetInputPair()
+    public override NodeInput GetInputConnector()
     {
         return this;
     }
 
-    public override NodeOutput GetOutputPair()
+    public override List<NodeOutput> GetOutputConnectors()
     {
-        return (NodeOutput)GetOppositePair();
+        return previousNodeOutputs;
     }
+
 }
