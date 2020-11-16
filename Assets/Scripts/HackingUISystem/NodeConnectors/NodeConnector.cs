@@ -120,6 +120,9 @@ public abstract class NodeConnector : EventTrigger
         if (GetOutputPair())
         {
             GetOutputPair().DestroyLine();
+        }
+        if(GetOppositePair())
+        {
             GetOppositePair().SetOppositePair(null);
         }
         SetOppositePair(null);
