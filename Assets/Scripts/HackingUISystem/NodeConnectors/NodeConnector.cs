@@ -71,8 +71,7 @@ public abstract class NodeConnector : EventTrigger
     {
         dragging = true;
 
-        NodeConnector connection = GetConnection(eventData);
-        if (connection && connection is NodeInput)
+        if (this is NodeOutput)
         {
             Disconnect();
         }
@@ -86,11 +85,23 @@ public abstract class NodeConnector : EventTrigger
     public override void OnPointerUp(PointerEventData eventData)
     {
         NodeConnector connection = GetConnection(eventData);
+
         if (connection)
         {
-            SetUpConnection(connection);
-            SetLinePositions();
-            //line.Points[endIndex] = connection.transform.position - gameObject.transform.position;
+            if (connection.GetOppositePair() != this)
+            {
+                if (connection is NodeOutput)
+                {
+                    connection.Disconnect();
+                }
+
+                SetUpConnection(connection);
+                SetLinePositions();
+            }
+            else
+            {
+                DestroyLine();
+            }
         }
         else
         {
@@ -153,6 +164,7 @@ public abstract class NodeConnector : EventTrigger
 
         if (GetOppositePair())
         {
+            DestroyLine();
             GetOppositePair().DestroyLine();
             GetOppositePair().SetOppositePair(null);
         }
@@ -186,6 +198,7 @@ public abstract class NodeConnector : EventTrigger
 
     public void DestroyLine()
     {
+        line = null;
         Destroy(lineObject);
     }
 
