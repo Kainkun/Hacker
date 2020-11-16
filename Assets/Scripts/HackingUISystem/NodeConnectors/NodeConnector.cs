@@ -31,7 +31,14 @@ public abstract class NodeConnector : EventTrigger
     {
         if (dragging)
         {
-            DrawLine();
+            lineTarget = new Vector2(Input.mousePosition.x, Input.mousePosition.y) - (Vector2)gameObject.transform.position;
+            line.Points[endIndex] = lineTarget;
+            var xDist = line.Points[endIndex].x - line.Points[startIndex].x;
+            var tempHandleOffset = xDist / 3;
+            line.Points[startHandle] = line.Points[startIndex] + new Vector2(tempHandleOffset, 0);
+            line.Points[endHandle] = line.Points[endIndex] - new Vector2(tempHandleOffset, 0);
+
+            line.SetAllDirty();
         }
     }
 
