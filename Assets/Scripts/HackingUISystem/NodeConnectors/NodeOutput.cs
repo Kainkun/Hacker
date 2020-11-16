@@ -62,8 +62,8 @@ public class NodeOutput : NodeConnector
         if (GetOppositePair() != null)
         {
             GetOppositePair().SetOppositePair(this);
-            CreateLine();
-            DrawLine();
+            CreateConnectedLine();
+            DrawConnectedLine();
         }
     }
 }
