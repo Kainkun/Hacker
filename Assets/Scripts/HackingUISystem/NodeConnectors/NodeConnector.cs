@@ -55,6 +55,9 @@ public abstract class NodeConnector : EventTrigger
 
     protected void DrawLine()
     {
+        if (GetOppositePair() == null)
+            return;
+
         line.Points[endIndex] = GetOppositePair().transform.position - transform.position;
         var xDist = line.Points[endIndex].x - line.Points[startIndex].x;
         var tempHandleOffset = xDist / 3;

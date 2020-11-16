@@ -134,6 +134,11 @@ public class HackingUISystem : MonoBehaviour
 
         node.transform.localPosition = command.connectedNodePosition;
 
+        if (node is PrintNode)
+            ((PrintNode)node).SetInputField();
+        if (node is IfSeeNode)
+            ((IfSeeNode)node).SetInputField();
+
         return node;
     }
 
@@ -190,5 +195,9 @@ public class HackingUISystem : MonoBehaviour
         currentlyEditingComputer.RunProgram(programIndex);
     }
 
+    public void StopCurrentProgram()
+    {
+        currentlyEditingComputer.StopCurrentProgram();
+    }
 
 }

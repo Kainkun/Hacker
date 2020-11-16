@@ -63,7 +63,8 @@ public abstract class CommandNode : EventTrigger
 
     public void ActivateIcon(bool activate = true)
     {
-        nodeIcon.color = activate ? Color.green : Color.white;
+        if(nodeIcon != null)
+            nodeIcon.color = activate ? Color.green : Color.white;
     }
 
     public void DisplayConnections()

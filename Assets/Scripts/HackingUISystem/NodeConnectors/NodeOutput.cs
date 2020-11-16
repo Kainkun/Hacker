@@ -44,24 +44,26 @@ public class NodeOutput : NodeConnector
     {
         if (parentNode.attachedCommand is Next)
         {
-            SetOppositePair(((Next)parentNode.attachedCommand).GetNextCommand().connectedNode.nodeInput);
+            SetOppositePair(((Next)parentNode.attachedCommand).GetNextCommand()?.connectedNode.nodeInput);
         }
         else if (parentNode.attachedCommand is If)
         {
             if (this is NodeOutputTrue)
-                SetOppositePair(((If)parentNode.attachedCommand).GetIfTrueCommand().connectedNode.nodeInput);
+                SetOppositePair(((If)parentNode.attachedCommand).GetIfTrueCommand()?.connectedNode.nodeInput);
             else
-                SetOppositePair(((If)parentNode.attachedCommand).GetIfFalseCommand().connectedNode.nodeInput);
+                SetOppositePair(((If)parentNode.attachedCommand).GetIfFalseCommand()?.connectedNode.nodeInput);
         }
         else
         {
             Debug.LogError("Bad");
         }
 
-        GetOppositePair().SetOppositePair(this);
 
-
-        CreateLine();
-        DrawLine();
+        if (GetOppositePair() != null)
+        {
+            GetOppositePair().SetOppositePair(this);
+            CreateLine();
+            DrawLine();
+        }
     }
 }
