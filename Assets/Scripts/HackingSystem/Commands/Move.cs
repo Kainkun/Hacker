@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Move : Next
 {
+    [SerializeReference]
     public Vector2 directionToMove;
 
+    public Move() { }
     public Move(Vector2 direction)
     {
         directionToMove = direction;
@@ -15,11 +17,24 @@ public class Move : Next
     {
         parentComputer.transform.Translate(directionToMove);
     }
+
+    public void SetDirection(Vector2 direction)
+    {
+        directionToMove = direction;
+    }
 }
 
-public class MoveForward : Next
+public abstract class MoveDirection : Next
 {
-    public float distance;
+    [SerializeReference]
+    protected float distance;
+    public abstract void SetDistance(float dist);
+
+}
+
+public class MoveForward : MoveDirection
+{
+    
     public MoveForward(float distance = 1)
     {
         this.distance = distance;
@@ -29,12 +44,16 @@ public class MoveForward : Next
     {
         parentComputer.movement.MoveForward(distance);
     }
+
+    public override void SetDistance(float dist)
+    {
+        distance = dist;
+    }
 }
 
 
-public class MoveBack : Next
+public class MoveBack : MoveDirection
 {
-    public float distance;
     public MoveBack(float distance = 1)
     {
         this.distance = distance;
@@ -44,11 +63,15 @@ public class MoveBack : Next
     {
         parentComputer.movement.MoveBackwards(distance);
     }
+
+    public override void SetDistance(float dist)
+    {
+        distance = dist;
+    }
 }
 
-public class MoveLeft : Next
+public class MoveLeft : MoveDirection
 {
-    public float distance;
     public MoveLeft(float distance = 1)
     {
         this.distance = distance;
@@ -58,10 +81,14 @@ public class MoveLeft : Next
     {
         parentComputer.movement.MoveLeft(distance);
     }
+
+    public override void SetDistance(float dist)
+    {
+        distance = dist;
+    }
 }
-public class MoveRight : Next
+public class MoveRight : MoveDirection
 {
-    public float distance;
     public MoveRight(float distance = 1)
     {
         this.distance = distance;
@@ -70,5 +97,10 @@ public class MoveRight : Next
     public override void Activate()
     {
         parentComputer.movement.MoveRight(distance);
+    }
+
+    public override void SetDistance(float dist)
+    {
+        distance = dist;
     }
 }

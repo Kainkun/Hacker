@@ -8,4 +8,9 @@ public abstract class Next : Command
     {
         nextCommand = command;
     }
+
+    public Command GetNextCommand(Command command)
+    {
+        return nextCommand;
+    }
 }

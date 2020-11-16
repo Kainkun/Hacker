@@ -1,6 +1,6 @@
 {
     "parentComputer": {
-        "instanceID": 20100
+        "instanceID": 16182
     },
     "name": "SightTest_Program",
     "commands": [
@@ -18,35 +18,41 @@
         "version": 1,
         "00000000": {
             "type": {
-                "class": "IfSee",
-                "ns": "",
-                "asm": "Assembly-CSharp"
-            },
-            "data": {
-                "parentComputer": {
-                    "instanceID": 20100
-                },
-                "parentProgram": {
-                    "id": 3
-                },
-                "nextCommand": {
-                    "id": 0
-                },
-                "tag": "Player"
-            }
-        },
-        "00000001": {
-            "type": {
                 "class": "MoveForward",
                 "ns": "",
                 "asm": "Assembly-CSharp"
             },
             "data": {
                 "parentComputer": {
-                    "instanceID": 20100
+                    "instanceID": 16182
                 },
                 "parentProgram": {
                     "id": 3
+                },
+                "connectedNode": {
+                    "instanceID": 0
+                },
+                "nextCommand": {
+                    "id": 1
+                },
+                "distance": 1.0
+            }
+        },
+        "00000001": {
+            "type": {
+                "class": "MoveBack",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentComputer": {
+                    "instanceID": 16182
+                },
+                "parentProgram": {
+                    "id": 3
+                },
+                "connectedNode": {
+                    "instanceID": 0
                 },
                 "nextCommand": {
                     "id": 2
@@ -56,21 +62,30 @@
         },
         "00000002": {
             "type": {
-                "class": "MoveBack",
+                "class": "IfSee",
                 "ns": "",
                 "asm": "Assembly-CSharp"
             },
             "data": {
                 "parentComputer": {
-                    "instanceID": 20100
+                    "instanceID": 16182
                 },
                 "parentProgram": {
                     "id": 3
                 },
+                "connectedNode": {
+                    "instanceID": 0
+                },
                 "nextCommand": {
+                    "id": 4
+                },
+                "ifTrue": {
                     "id": 0
                 },
-                "distance": 1.0
+                "ifFalse": {
+                    "id": 2
+                },
+                "tag": "Player"
             }
         },
         "00000003": {
@@ -81,7 +96,7 @@
             },
             "data": {
                 "parentComputer": {
-                    "instanceID": 20100
+                    "instanceID": 16182
                 },
                 "name": "SightTest_Program",
                 "commands": [
@@ -98,6 +113,14 @@
             }
         },
         "00000004": {
+            "type": {
+                "class": "",
+                "ns": "",
+                "asm": ""
+            },
+            "data": {}
+        },
+        "00000005": {
             "type": {
                 "class": "Terminus",
                 "ns": "UnityEngine.DMAT",

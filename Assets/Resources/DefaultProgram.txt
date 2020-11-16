@@ -1,0 +1,74 @@
+{
+    "parentComputer": {
+        "instanceID": 20618
+    },
+    "name": "DefaultProgram",
+    "commands": [
+        {
+            "id": 0
+        }
+    ],
+    "references": {
+        "version": 1,
+        "00000000": {
+            "type": {
+                "class": "Print",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentComputer": {
+                    "instanceID": 20618
+                },
+                "parentProgram": {
+                    "id": 1
+                },
+                "connectedNode": {
+                    "instanceID": -147684
+                },
+                "connectedNodePosition": {
+                    "x": -125.983154296875,
+                    "y": 27.809024810791017
+                },
+                "nextCommand": {
+                    "id": 2
+                },
+                "stringToPrint": "1"
+            }
+        },
+        "00000001": {
+            "type": {
+                "class": "Program",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentComputer": {
+                    "instanceID": 20618
+                },
+                "name": "DefaultProgram",
+                "commands": [
+                    {
+                        "id": 0
+                    }
+                ]
+            }
+        },
+        "00000002": {
+            "type": {
+                "class": "",
+                "ns": "",
+                "asm": ""
+            },
+            "data": {}
+        },
+        "00000003": {
+            "type": {
+                "class": "Terminus",
+                "ns": "UnityEngine.DMAT",
+                "asm": "FAKE_ASM"
+            },
+            "data": {}
+        }
+    }
+}

@@ -18,4 +18,14 @@ public abstract class If : Command
     {
         ifFalse = command;
     }
+
+    public Command GetIfTrueCommand()
+    {
+        return ifTrue;
+    }
+
+    public Command GetIfFalseCommand()
+    {
+        return ifFalse;
+    }
 }

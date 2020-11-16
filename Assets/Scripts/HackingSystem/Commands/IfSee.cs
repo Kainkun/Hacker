@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class IfSee : If
 {
+    [SerializeReference]
     public string tag;
 
+    public IfSee() { }
     public IfSee(string tag)
+    {
+        this.tag = tag;
+    }
+
+    public void SetTag(string tag)
     {
         this.tag = tag;
     }
