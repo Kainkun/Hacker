@@ -102,7 +102,7 @@ public class Computer : MonoBehaviour
     public void ProgramToTxt(Program program) //Stores the program as a JSON
     {
         string prog = JsonUtility.ToJson(program, true);
-        StreamWriter writer = new StreamWriter($"Assets/Resources/{program.name}.txt");
+        StreamWriter writer = new StreamWriter($"Assets/Resources/Programs/{program.name}.txt");
         writer.WriteLine(prog);
         writer.Close();
         print($"Done saving program: {program.name}.txt");
@@ -110,7 +110,7 @@ public class Computer : MonoBehaviour
 
     public Program TxtToProgram(string fileName)
     {
-        StreamReader reader = new StreamReader($"Assets/Resources/{fileName}");
+        StreamReader reader = new StreamReader($"Assets/Resources/Programs/{fileName}");
         string prog = reader.ReadToEnd();
         Program program = JsonUtility.FromJson<Program>(prog);
         print($"Done loading program: {fileName}");

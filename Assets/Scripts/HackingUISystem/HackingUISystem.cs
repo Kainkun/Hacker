@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using TMPro;
 
 public class HackingUISystem : MonoBehaviour
 {
     public static HackingUISystem instance;
 
     public GameObject trashBin;
+    public TMP_InputField programNameInputField;
 
     Computer currentlyEditingComputer;
     Program currentlyEditingProgram;
@@ -84,8 +86,8 @@ public class HackingUISystem : MonoBehaviour
         else
         {
             EditProgram(computer.programs[0]);
-            DisplayProgram(computer.programs[0]);
         }
+            DisplayProgram(computer.programs[0]);
     }
 
     public void EditProgram(Program program)
@@ -104,6 +106,8 @@ public class HackingUISystem : MonoBehaviour
 
     public void DisplayProgram(Program prog)
     {
+        programNameInputField.text = prog.name;
+        
         foreach (var command in prog.GetCommands())
             DisplayCommandAsNode(command);
         foreach (var node in nodes)
@@ -198,6 +202,11 @@ public class HackingUISystem : MonoBehaviour
     public void StopCurrentProgram()
     {
         currentlyEditingComputer.StopCurrentProgram();
+    }
+
+    public void SetCurrentProgramName(string name)
+    {
+        currentlyEditingProgram.name = name;
     }
 
 }
