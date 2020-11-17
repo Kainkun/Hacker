@@ -117,6 +117,8 @@ public class Computer : MonoBehaviour
     {
         program.parentComputer = this;
         programs.Add(program);
+        print(program.parentComputer);
+        print(program.GetCommand(0).parentProgram.parentComputer);
     }
 
     public void ProgramToTxt(Program program) //Stores the program as a JSON

@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-[System.Serializable]
+[Serializable]
 public class Program
 {
+    [SerializeReference]
+    Program thisProgram;
 
     //TODO: make sure parentComputer is a reference and not a new Computer
     public Computer parentComputer;
     public string name;
     public Program(string name, bool noStartNode = false)
     {
+        thisProgram = this;
         this.name = name;
 
         if (!noStartNode)
@@ -26,7 +29,7 @@ public class Program
 
     public Command AddCommand(Command command)
     {
-        command.parentProgram = this;
+        command.parentProgram = thisProgram;
         commands.Add(command);
         return command;
     }
