@@ -6,15 +6,11 @@ using System;
 [Serializable]
 public class Program
 {
-    [SerializeReference]
-    Program thisProgram;
-
     //TODO: make sure parentComputer is a reference and not a new Computer
     public Computer parentComputer;
     public string name;
     public Program(string name, bool noStartNode = false)
     {
-        thisProgram = this;
         this.name = name;
 
         if (!noStartNode)
@@ -29,7 +25,7 @@ public class Program
 
     public Command AddCommand(Command command)
     {
-        command.parentProgram = thisProgram;
+        command.parentProgram = this;
         commands.Add(command);
         return command;
     }

@@ -117,6 +117,9 @@ public class Computer : MonoBehaviour
     {
         program.parentComputer = this;
         programs.Add(program);
+        //same if create new program
+        //parent computer missing if made from txt
+        //when get from txt, parentComputer seems to be a different difference for the two
         print(program.parentComputer);
         print(program.GetCommand(0).parentProgram.parentComputer);
     }
