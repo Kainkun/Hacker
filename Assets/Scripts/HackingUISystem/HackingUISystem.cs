@@ -101,6 +101,7 @@ public class HackingUISystem : MonoBehaviour
             nodes[0].HideNode();
         currentlyEditingProgram = null;
         currentlyEditingComputer = null;
+        Player.instance.EnableInput();
         gameObject.SetActive(false);
     }
 

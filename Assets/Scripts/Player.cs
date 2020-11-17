@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     Rigidbody2D rb;
     public float moveSpeed = 1;
     public GameObject HackingUICanvas;
+    bool disableInput;
+    Vector2 movementInput;
 
     private void Awake()
     {
@@ -20,11 +22,28 @@ public class Player : MonoBehaviour
 
     }
 
-    Vector2 input;
     void Update()
     {
-        input.x = Input.GetAxis("Horizontal");
-        input.y = Input.GetAxis("Vertical");
+
+        if (!disableInput)
+            GetInput();
+    }
+
+    public void DisableInput()
+    {
+        disableInput = true;
+        movementInput = Vector2.zero;
+    }
+
+    public void EnableInput()
+    {
+        disableInput = false;
+    }
+
+    void GetInput()
+    {
+        movementInput.x = Input.GetAxis("Horizontal");
+        movementInput.y = Input.GetAxis("Vertical");
 
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -33,17 +52,17 @@ public class Player : MonoBehaviour
                 var closestComputer = GetClosestComputerInRange();
                 if (closestComputer != null)
                 {
+                    DisableInput();
                     HackingUICanvas.SetActive(true);
                     HackingUISystem.instance.EditComputer(closestComputer);
                 }
             }
         }
-
     }
 
     private void FixedUpdate()
     {
-        rb.MovePosition(rb.position + input * moveSpeed);
+        rb.MovePosition(rb.position + movementInput * moveSpeed);
 
     }
 
