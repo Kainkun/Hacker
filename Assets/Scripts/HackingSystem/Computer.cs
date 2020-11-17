@@ -41,7 +41,7 @@ public class Computer : MonoBehaviour
 
     private void Start()
     {
-        if(RunProgramOnStart && programs.Count > 0)
+        if (RunProgramOnStart && programs.Count > 0)
             RunProgram(0);
         //AddProgram(CreateTestProgramSight());
     }
@@ -64,11 +64,6 @@ public class Computer : MonoBehaviour
         // }
     }
 
-    public void AddProgram(Program program)
-    {
-        //program.parentComputer = this; //this is being handled in the constructor ATM
-        programs.Add(program);
-    }
 
     // public Program CreateTestProgram()
     // {
@@ -111,6 +106,18 @@ public class Computer : MonoBehaviour
 
     //     return program;
     // }
+
+    public void CreateProgram(string name = "DefaultProgram")
+    {
+        var p = new Program(name);
+        AddProgram(p);
+    }
+
+    public void AddProgram(Program program)
+    {
+        program.parentComputer = this;
+        programs.Add(program);
+    }
 
     public void ProgramToTxt(Program program) //Stores the program as a JSON
     {

@@ -10,11 +10,9 @@ public class Program
     //TODO: make sure parentComputer is a reference and not a new Computer
     public Computer parentComputer;
     public string name;
-    //TODO: is there a better way to get parent? is there a better way to handle parent?
-    public Program(string name, Computer parentComputer, bool noStartNode = false)
+    public Program(string name, bool noStartNode = false)
     {
         this.name = name;
-        this.parentComputer = parentComputer;
 
         if (!noStartNode)
         {
@@ -28,7 +26,6 @@ public class Program
 
     public Command AddCommand(Command command)
     {
-        command.parentComputer = parentComputer;
         command.parentProgram = this;
         commands.Add(command);
         return command;

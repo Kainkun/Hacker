@@ -93,13 +93,9 @@ public class HackingUISystem : MonoBehaviour
         currentlyEditingComputer = computer;
         if (computer.programs.Count == 0)
         {
-            EditProgram(new Program("DefaultProgram", currentlyEditingComputer));
-            currentlyEditingComputer.AddProgram(currentlyEditingProgram);
+            currentlyEditingComputer.CreateProgram();
         }
-        else
-        {
-            EditProgram(computer.programs[0]);
-        }
+        EditProgram(computer.programs[0]);
         DisplayProgram(computer.programs[0]);
     }
 

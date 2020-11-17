@@ -1,6 +1,6 @@
 {
     "parentComputer": {
-        "instanceID": 16356
+        "instanceID": 38428
     },
     "name": "Circles",
     "commands": [
@@ -29,14 +29,11 @@
                 "asm": "Assembly-CSharp"
             },
             "data": {
-                "parentComputer": {
-                    "instanceID": 16356
-                },
                 "parentProgram": {
                     "id": 5
                 },
                 "connectedNode": {
-                    "instanceID": -24736
+                    "instanceID": -36266
                 },
                 "connectedNodePosition": {
                     "x": 20.0,
@@ -54,18 +51,15 @@
                 "asm": "Assembly-CSharp"
             },
             "data": {
-                "parentComputer": {
-                    "instanceID": 16356
-                },
                 "parentProgram": {
                     "id": 5
                 },
                 "connectedNode": {
-                    "instanceID": -24770
+                    "instanceID": -36300
                 },
                 "connectedNodePosition": {
-                    "x": -194.45947265625,
-                    "y": 21.879039764404298
+                    "x": -172.8378448486328,
+                    "y": 9.523825645446778
                 },
                 "nextCommand": {
                     "id": 2
@@ -80,18 +74,15 @@
                 "asm": "Assembly-CSharp"
             },
             "data": {
-                "parentComputer": {
-                    "instanceID": 16356
-                },
                 "parentProgram": {
                     "id": 5
                 },
                 "connectedNode": {
-                    "instanceID": -24810
+                    "instanceID": -36360
                 },
                 "connectedNodePosition": {
-                    "x": -77.08494567871094,
-                    "y": 29.60104751586914
+                    "x": -51.602317810058597,
+                    "y": 8.751625061035157
                 },
                 "nextCommand": {
                     "id": 3
@@ -106,18 +97,15 @@
                 "asm": "Assembly-CSharp"
             },
             "data": {
-                "parentComputer": {
-                    "instanceID": 16356
-                },
                 "parentProgram": {
                     "id": 5
                 },
                 "connectedNode": {
-                    "instanceID": -24850
+                    "instanceID": -36420
                 },
                 "connectedNodePosition": {
-                    "x": -46.1969108581543,
-                    "y": -42.9858283996582
+                    "x": -52.37451934814453,
+                    "y": -53.7966423034668
                 },
                 "nextCommand": {
                     "id": 4
@@ -132,18 +120,15 @@
                 "asm": "Assembly-CSharp"
             },
             "data": {
-                "parentComputer": {
-                    "instanceID": 16356
-                },
                 "parentProgram": {
                     "id": 5
                 },
                 "connectedNode": {
-                    "instanceID": -24890
+                    "instanceID": -36520
                 },
                 "connectedNodePosition": {
-                    "x": -182.10426330566407,
-                    "y": -42.9858283996582
+                    "x": -50.830116271972659,
+                    "y": -114.02830505371094
                 },
                 "nextCommand": {
                     "id": 1
@@ -159,7 +144,7 @@
             },
             "data": {
                 "parentComputer": {
-                    "instanceID": 16356
+                    "instanceID": 38428
                 },
                 "name": "Circles",
                 "commands": [

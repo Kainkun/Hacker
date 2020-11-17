@@ -15,7 +15,7 @@ public class Move : Next
 
     public override void Activate()
     {
-        parentComputer.transform.Translate(directionToMove);
+        parentProgram.parentComputer.transform.Translate(directionToMove);
     }
 
     public void SetDirection(Vector2 direction)
@@ -34,7 +34,7 @@ public abstract class MoveDirection : Next
 
 public class MoveForward : MoveDirection
 {
-    
+
     public MoveForward(float distance = 1)
     {
         this.distance = distance;
@@ -42,7 +42,7 @@ public class MoveForward : MoveDirection
 
     public override void Activate()
     {
-        parentComputer.movement.MoveForward(distance);
+        parentProgram.parentComputer.movement.MoveForward(distance);
     }
 
     public override void SetDistance(float dist)
@@ -61,7 +61,7 @@ public class MoveBack : MoveDirection
 
     public override void Activate()
     {
-        parentComputer.movement.MoveBackwards(distance);
+        parentProgram.parentComputer.movement.MoveBackwards(distance);
     }
 
     public override void SetDistance(float dist)
@@ -79,7 +79,7 @@ public class MoveLeft : MoveDirection
 
     public override void Activate()
     {
-        parentComputer.movement.MoveLeft(distance);
+        parentProgram.parentComputer.movement.MoveLeft(distance);
     }
 
     public override void SetDistance(float dist)
@@ -96,7 +96,7 @@ public class MoveRight : MoveDirection
 
     public override void Activate()
     {
-        parentComputer.movement.MoveRight(distance);
+        parentProgram.parentComputer.movement.MoveRight(distance);
     }
 
     public override void SetDistance(float dist)

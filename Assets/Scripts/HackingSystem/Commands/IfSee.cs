@@ -20,7 +20,7 @@ public class IfSee : If
 
     public override void Activate()
     {
-        parentComputer.sensors.StartCoroutine(parentComputer.sensors.LookForTag(tag, retval => { if (retval) nextCommand = ifTrue; else nextCommand = ifFalse; })); //use of callback to return a value
+        parentProgram.parentComputer.sensors.StartCoroutine(parentProgram.parentComputer.sensors.LookForTag(tag, retval => { if (retval) nextCommand = ifTrue; else nextCommand = ifFalse; })); //use of callback to return a value
     }
 
 }

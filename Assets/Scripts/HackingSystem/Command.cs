@@ -6,8 +6,6 @@ using UnityEngine;
 public abstract class Command
 {
     [SerializeReference]
-    public Computer parentComputer;
-    [SerializeReference]
     public Program parentProgram;
     public CommandNode connectedNode;
     [SerializeReference]
