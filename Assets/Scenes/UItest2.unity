@@ -432,6 +432,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tickTime: 1
+  RunProgramOnStart: 0
+  preloadedPrograms: []
   programs: []
   movement: {fileID: 0}
   sensors: {fileID: 0}
@@ -1468,6 +1470,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tickTime: 1
+  RunProgramOnStart: 1
+  preloadedPrograms:
+  - Circles
   programs: []
   movement: {fileID: 0}
   sensors: {fileID: 0}

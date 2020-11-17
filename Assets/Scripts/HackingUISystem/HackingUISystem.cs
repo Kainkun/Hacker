@@ -37,12 +37,16 @@ public class HackingUISystem : MonoBehaviour
     private void Update()
     {
         //Dev input
-        // #if UNITY_EDITOR
-        //         if (Input.GetKeyDown(KeyCode.Alpha1))
-        //         {
-        //             CreateNode(StartNode);
-        //         }
-        // #endif
+#if UNITY_EDITOR
+        // if (Input.GetKeyDown(KeyCode.Alpha1))
+        // {
+        //     CreateNode(StartNode);
+        // }
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            currentlyEditingComputer.ProgramToTxt(currentlyEditingProgram);
+        }
+#endif
         // if (Input.GetKeyDown(KeyCode.Space))
         // {
         //     currentlyEditingComputer.RunProgram(0);

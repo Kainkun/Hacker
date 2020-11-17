@@ -6,6 +6,8 @@ using System.IO;
 public class Computer : MonoBehaviour
 {
     public float tickTime = 1;
+    public bool RunProgramOnStart;
+    public string[] preloadedPrograms;
     public List<Program> programs = new List<Program>(); //a computer has a list of programs it can run
 
     //Modules
@@ -17,6 +19,7 @@ public class Computer : MonoBehaviour
     private void Awake()
     {
         AddModules();
+        LoadPreloadedPrograms();
     }
 
     void AddModules()
@@ -28,8 +31,18 @@ public class Computer : MonoBehaviour
         sensors?.SetParentComputer(this);
     }
 
+    void LoadPreloadedPrograms()
+    {
+        foreach (var name in preloadedPrograms)
+        {
+            AddProgram(TxtToProgram(name));
+        }
+    }
+
     private void Start()
     {
+        if(RunProgramOnStart && programs.Count > 0)
+            RunProgram(0);
         //AddProgram(CreateTestProgramSight());
     }
 
@@ -57,47 +70,47 @@ public class Computer : MonoBehaviour
         programs.Add(program);
     }
 
-    public Program CreateTestProgram()
-    {
-        Program program = new Program("Test_Program", this);
+    // public Program CreateTestProgram()
+    // {
+    //     Program program = new Program("Test_Program", this);
 
-        //create different commands the program will run
-        Print print1 = new Print("First Print");
-        program.AddCommand(print1);
-        Move move1 = new Move(new Vector2(0, 1));
-        program.AddCommand(move1);
-        Print print2 = new Print("Second Print");
-        program.AddCommand(print2);
+    //     //create different commands the program will run
+    //     Print print1 = new Print("First Print");
+    //     program.AddCommand(print1);
+    //     Move move1 = new Move(new Vector2(0, 1));
+    //     program.AddCommand(move1);
+    //     Print print2 = new Print("Second Print");
+    //     program.AddCommand(print2);
 
-        //create the flow of commands, first command runs first
-        print1.SetNextCommand(move1);
-        move1.SetNextCommand(print2);
+    //     //create the flow of commands, first command runs first
+    //     print1.SetNextCommand(move1);
+    //     move1.SetNextCommand(print2);
 
-        //add the programs to the program's list of commands
-        //TODO: maybe this can be combined with the creattion of a command?
+    //     //add the programs to the program's list of commands
+    //     //TODO: maybe this can be combined with the creattion of a command?
 
-        return program;
-    }
+    //     return program;
+    // }
 
-    public Program CreateTestProgramSight()
-    {
-        Program program = new Program("SightTest_Program", this);
+    // public Program CreateTestProgramSight()
+    // {
+    //     Program program = new Program("SightTest_Program", this);
 
-        MoveForward move1 = new MoveForward();
-        program.AddCommand(move1);
-        MoveBack move2 = new MoveBack();
-        program.AddCommand(move2);
-        IfSee ifSee = new IfSee("Player");
-        program.AddCommand(ifSee);
+    //     MoveForward move1 = new MoveForward();
+    //     program.AddCommand(move1);
+    //     MoveBack move2 = new MoveBack();
+    //     program.AddCommand(move2);
+    //     IfSee ifSee = new IfSee("Player");
+    //     program.AddCommand(ifSee);
 
-        ifSee.SetIfFalse(ifSee);
-        ifSee.SetIfTrue(move1);
+    //     ifSee.SetIfFalse(ifSee);
+    //     ifSee.SetIfTrue(move1);
 
-        move1.SetNextCommand(move2);
-        move2.SetNextCommand(ifSee);
+    //     move1.SetNextCommand(move2);
+    //     move2.SetNextCommand(ifSee);
 
-        return program;
-    }
+    //     return program;
+    // }
 
     public void ProgramToTxt(Program program) //Stores the program as a JSON
     {
@@ -110,7 +123,7 @@ public class Computer : MonoBehaviour
 
     public Program TxtToProgram(string fileName)
     {
-        StreamReader reader = new StreamReader($"Assets/Resources/Programs/{fileName}");
+        StreamReader reader = new StreamReader($"Assets/Resources/Programs/{fileName}.txt");
         string prog = reader.ReadToEnd();
         Program program = JsonUtility.FromJson<Program>(prog);
         print($"Done loading program: {fileName}");
