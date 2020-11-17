@@ -13,6 +13,7 @@ public class HackingUISystem : MonoBehaviour
 
     Computer currentlyEditingComputer;
     Program currentlyEditingProgram;
+    public GameObject background;
     public List<CommandNode> nodes = new List<CommandNode>();
 
     public GameObject PrintNode;
@@ -21,6 +22,7 @@ public class HackingUISystem : MonoBehaviour
     public GameObject MoveLeftNode;
     public GameObject MoveRightNode;
     public GameObject IfSeeNode;
+    public GameObject StartNode;
 
     private void Awake()
     {
@@ -34,6 +36,13 @@ public class HackingUISystem : MonoBehaviour
 
     private void Update()
     {
+        //Dev input
+        // #if UNITY_EDITOR
+        //         if (Input.GetKeyDown(KeyCode.Alpha1))
+        //         {
+        //             CreateNode(StartNode);
+        //         }
+        // #endif
         // if (Input.GetKeyDown(KeyCode.Space))
         // {
         //     currentlyEditingComputer.RunProgram(0);
@@ -87,7 +96,7 @@ public class HackingUISystem : MonoBehaviour
         {
             EditProgram(computer.programs[0]);
         }
-            DisplayProgram(computer.programs[0]);
+        DisplayProgram(computer.programs[0]);
     }
 
     public void EditProgram(Program program)
@@ -108,7 +117,7 @@ public class HackingUISystem : MonoBehaviour
     public void DisplayProgram(Program prog)
     {
         programNameInputField.text = prog.name;
-        
+
         foreach (var command in prog.GetCommands())
             DisplayCommandAsNode(command);
         foreach (var node in nodes)
@@ -117,7 +126,7 @@ public class HackingUISystem : MonoBehaviour
 
     public CommandNode CreateNode(GameObject nodePrefab)
     {
-        GameObject nodeObject = Instantiate(nodePrefab, transform);
+        GameObject nodeObject = Instantiate(nodePrefab, background.transform);
         CommandNode node = nodeObject.GetComponent<CommandNode>();
         Command command = currentlyEditingProgram.CreateCommand(node.AssociatedType());
 
@@ -130,14 +139,15 @@ public class HackingUISystem : MonoBehaviour
 
     public CommandNode DisplayCommandAsNode(Command command)
     {
-        GameObject nodeObject = Instantiate(GetNodePrefab(command), transform);
+        GameObject nodeObject = Instantiate(GetNodePrefab(command), background.transform);
         CommandNode node = nodeObject.GetComponent<CommandNode>();
 
         nodes.Add(node);
         node.attachedCommand = command;
         command.SetConnectedNode(node);
 
-        node.transform.localPosition = command.connectedNodePosition;
+        RectTransform rect = node.transform as RectTransform;
+        rect.anchoredPosition = command.connectedNodePosition;
 
         if (node is PrintNode)
             ((PrintNode)node).SetInputField();
@@ -166,6 +176,8 @@ public class HackingUISystem : MonoBehaviour
             return MoveLeftNode;
         else if (command is IfSee)
             return IfSeeNode;
+        else if (command is Start)
+            return StartNode;
 
         return null;
     }

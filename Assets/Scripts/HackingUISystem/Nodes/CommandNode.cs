@@ -33,10 +33,13 @@ public abstract class CommandNode : EventTrigger
 
     public void Update()
     {
-        if (dragging)
+        if (dragging && !(this is StartNode))
         {
             transform.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-            attachedCommand.connectedNodePosition = transform.localPosition;
+
+            RectTransform rect = transform as RectTransform;
+            attachedCommand.connectedNodePosition = rect.anchoredPosition;
+
             foreach (var nodeConnector in nodeConnectors)
             {
                 nodeConnector.DrawConnectedLines();

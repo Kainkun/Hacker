@@ -11,10 +11,16 @@ public class Program
     public Computer parentComputer;
     public string name;
     //TODO: is there a better way to get parent? is there a better way to handle parent?
-    public Program(string name, Computer parentComputer)
+    public Program(string name, Computer parentComputer, bool noStartNode = false)
     {
         this.name = name;
         this.parentComputer = parentComputer;
+
+        if (!noStartNode)
+        {
+            Start command = (Start)AddCommand(new Start());
+            command.connectedNodePosition = new Vector2(20, 15);
+        }
     }
 
     [SerializeReference]
@@ -65,6 +71,8 @@ public class Program
             return AddCommand(new MoveRight());
         else if (type == typeof(IfSee))
             return AddCommand(new IfSee());
+        else if (type == typeof(Start))
+            return AddCommand(new Start());
 
         Debug.LogError("Command missing");
         return null;
