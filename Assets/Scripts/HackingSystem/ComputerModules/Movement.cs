@@ -29,6 +29,8 @@ public class Movement : ComputerModule
             time += Time.deltaTime;
             yield return null;
         }
+        //snap
+        transform.position = kMath.SnapVector2(transform.position);
 
     }
 }

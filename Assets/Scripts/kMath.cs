@@ -12,4 +12,9 @@ public static class kMath
         dot = Mathf.Clamp(dot, -1, 1);
         return Mathf.Rad2Deg * Mathf.Acos(dot);
     }
+
+    public static Vector2 SnapVector2(Vector2 v)
+    {
+        return new Vector2(Mathf.Round(v.x), Mathf.Round(v.y));
+    }
 }
