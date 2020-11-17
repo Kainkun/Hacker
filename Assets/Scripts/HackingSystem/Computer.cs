@@ -116,12 +116,9 @@ public class Computer : MonoBehaviour
     public void AddProgram(Program program)
     {
         program.parentComputer = this;
+        foreach (var command in program.GetCommands())
+            command.parentProgram = program;
         programs.Add(program);
-        //same if create new program
-        //parent computer missing if made from txt
-        //when get from txt, parentComputer seems to be a different difference for the two
-        print(program.parentComputer);
-        print(program.GetCommand(0).parentProgram.parentComputer);
     }
 
     public void ProgramToTxt(Program program) //Stores the program as a JSON
@@ -139,6 +136,7 @@ public class Computer : MonoBehaviour
         string prog = reader.ReadToEnd();
         Program program = JsonUtility.FromJson<Program>(prog);
         print($"Done loading program: {fileName}");
+
         return program;
     }
 
