@@ -23,6 +23,8 @@ public class HackingUISystem : MonoBehaviour
     public GameObject MoveRightNode;
     public GameObject IfSeeNode;
     public GameObject StartNode;
+    public GameObject RotateRightNode;
+    public GameObject RotateLeftNode;
 
     private void Awake()
     {
@@ -178,6 +180,10 @@ public class HackingUISystem : MonoBehaviour
             return IfSeeNode;
         else if (command is Start)
             return StartNode;
+        else if (command is RotateRight)
+            return RotateRightNode;
+        else if (command is RotateLeft)
+            return RotateLeftNode;
 
         return null;
     }

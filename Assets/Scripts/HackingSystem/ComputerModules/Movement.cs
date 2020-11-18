@@ -13,6 +13,8 @@ public class Movement : ComputerModule
     public void MoveBackwards(float distance = 1) => StartCoroutine(MoveLerp(transform.position + (-transform.right * distance)));
     public void MoveRight(float distance = 1) => StartCoroutine(MoveLerp(transform.position + (-transform.up * distance)));
     public void MoveLeft(float distance = 1) => StartCoroutine(MoveLerp(transform.position + (transform.up * distance)));
+    public void RotateRight(float rotation = 90) => StartCoroutine(RotateLerp(rotation));
+    public void RotateLeft(float rotation = 90) => StartCoroutine(RotateLerp(-rotation));
 
     public void Turn()
     {
@@ -31,6 +33,29 @@ public class Movement : ComputerModule
         }
         //snap
         transform.position = kMath.SnapVector2(transform.position);
+
+    }
+
+    IEnumerator RotateLerp(float rotation) //Completes movement within tick time
+    {
+        float time = 0;
+        Quaternion startRotation = transform.localRotation;
+        Quaternion endRotation = startRotation;
+        Vector3 endEuler = endRotation.eulerAngles;
+        endEuler.z -= rotation;
+        endRotation = Quaternion.Euler(endEuler);
+
+
+        while (time < parentComputer.tickTime)
+        {
+            transform.localRotation = Quaternion.Lerp(startRotation, endRotation, time / parentComputer.tickTime);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        //snap
+        Vector3 angle = transform.localEulerAngles;
+        angle.z = Mathf.Round(angle.z / 90) * 90;
+        transform.localEulerAngles = angle;
 
     }
 }
