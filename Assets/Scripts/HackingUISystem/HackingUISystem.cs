@@ -25,6 +25,7 @@ public class HackingUISystem : MonoBehaviour
     public GameObject StartNode;
     public GameObject RotateRightNode;
     public GameObject RotateLeftNode;
+    public GameObject IfInfrontNode;
 
     private void Awake()
     {
@@ -155,6 +156,8 @@ public class HackingUISystem : MonoBehaviour
             ((PrintNode)node).SetInputField();
         if (node is IfSeeNode)
             ((IfSeeNode)node).SetInputField();
+        if (node is IfInfrontNode)
+            ((IfInfrontNode)node).SetInputField();
 
         return node;
     }
@@ -184,6 +187,8 @@ public class HackingUISystem : MonoBehaviour
             return RotateRightNode;
         else if (command is RotateLeft)
             return RotateLeftNode;
+        else if (command is IfInfront)
+            return IfInfrontNode;
 
         return null;
     }

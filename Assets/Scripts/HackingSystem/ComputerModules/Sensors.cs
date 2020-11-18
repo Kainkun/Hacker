@@ -10,12 +10,17 @@ public class Sensors : ComputerModule
     public float visionDistance = 3;
     public float visionAngle = 90;
 
-    public IEnumerator LookForTag(string tag, System.Action<bool> callback) //look for objects with tag for the duration of the command, uses a callback to return a value
+    public IEnumerator LookForTag(string tag, System.Action<bool> callback, bool onlyInfront = false) //look for objects with tag for the duration of the command, uses a callback to return a value
     {
         float time = 0;
         while (time < parentComputer.tickTime)
         {
-            if (LookForObjectWithTag(tag))
+            if (onlyInfront && LookForObjectWithTag(tag, true))
+            {
+                callback(true);
+                yield break;
+            }
+            else if (!onlyInfront && LookForObjectWithTag(tag))
             {
                 callback(true);
                 yield break;
@@ -26,9 +31,14 @@ public class Sensors : ComputerModule
         callback(false);
     }
 
-    bool LookForObjectWithTag(string tag)
+    bool LookForObjectWithTag(string tag, bool onlyInfront = false)
     {
-        List<GameObject> objects = ObjectsInView();
+        List<GameObject> objects;
+        if (!onlyInfront)
+            objects = ObjectsInView();
+        else
+            objects = ObjectsInfront();
+
 
         foreach (var item in objects)
         {
@@ -60,6 +70,22 @@ public class Sensors : ComputerModule
         return objectsInView;
     }
 
+    List<GameObject> ObjectsInfront() //get all objects that are one unit infront of sensor
+    {
+        List<Collider2D> colliders;
+
+        colliders = new List<Collider2D>();
+        colliders.AddRange(Physics2D.OverlapBoxAll(transform.position + transform.right, new Vector2(.95f, .95f), transform.localEulerAngles.z));
+
+        List<GameObject> objects = new List<GameObject>();
+        foreach (var collider in colliders)
+        {
+            objects.Add(collider.gameObject);
+        }
+
+        return objects;
+    }
+
     public bool WithinFOVAngle(Vector2 position)
     {
         Vector2 forward = transform.right;
@@ -86,6 +112,8 @@ public class Sensors : ComputerModule
         Handles.color = new Color(1f, 0.2f, 0.2f, 0.2f);
         Vector3 startDir = new Vector3(Mathf.Cos(((visionAngle / 2) + transform.eulerAngles.z) * Mathf.Deg2Rad), Mathf.Sin(((visionAngle / 2) + transform.eulerAngles.z) * Mathf.Deg2Rad), 0);
         Handles.DrawSolidArc(transform.position, -Vector3.forward, startDir, visionAngle, visionDistance);
+        Handles.color = new Color(0, 0, 0, 0.2f);
+        Handles.DrawWireCube(transform.position + transform.right, new Vector2(.95f, .95f));
     }
 #endif
 }

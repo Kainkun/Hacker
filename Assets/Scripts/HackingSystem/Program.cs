@@ -73,6 +73,8 @@ public class Program
             return AddCommand(new RotateRight());
         else if (type == typeof(RotateLeft))
             return AddCommand(new RotateLeft());
+        else if (type == typeof(IfInfront))
+            return AddCommand(new IfInfront());
 
         Debug.LogError("Command missing");
         return null;
