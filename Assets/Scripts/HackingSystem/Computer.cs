@@ -135,6 +135,7 @@ public class Computer : MonoBehaviour
         StreamReader reader = new StreamReader($"Assets/Resources/Programs/{fileName}.txt");
         string prog = reader.ReadToEnd();
         Program program = JsonUtility.FromJson<Program>(prog);
+        program.name = fileName;
         print($"Done loading program: {fileName}");
 
         return program;

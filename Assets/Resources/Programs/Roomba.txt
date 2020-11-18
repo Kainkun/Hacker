@@ -1,0 +1,155 @@
+{
+    "parentComputer": {
+        "instanceID": 24064
+    },
+    "name": "Roomba",
+    "commands": [
+        {
+            "id": 0
+        },
+        {
+            "id": 1
+        },
+        {
+            "id": 2
+        },
+        {
+            "id": 3
+        }
+    ],
+    "references": {
+        "version": 1,
+        "00000000": {
+            "type": {
+                "class": "Start",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentProgram": {
+                    "id": 4
+                },
+                "connectedNode": {
+                    "instanceID": -55832
+                },
+                "connectedNodePosition": {
+                    "x": 20.0,
+                    "y": 15.0
+                },
+                "nextCommand": {
+                    "id": 1
+                }
+            }
+        },
+        "00000001": {
+            "type": {
+                "class": "IfInfront",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentProgram": {
+                    "id": 4
+                },
+                "connectedNode": {
+                    "instanceID": -55862
+                },
+                "connectedNodePosition": {
+                    "x": -219.58575439453126,
+                    "y": 20.038551330566408
+                },
+                "nextCommand": {
+                    "id": 2
+                },
+                "ifTrue": {
+                    "id": 3
+                },
+                "ifFalse": {
+                    "id": 2
+                },
+                "tag": "Wall"
+            }
+        },
+        "00000002": {
+            "type": {
+                "class": "MoveForward",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentProgram": {
+                    "id": 4
+                },
+                "connectedNode": {
+                    "instanceID": -55972
+                },
+                "connectedNodePosition": {
+                    "x": -221.8979034423828,
+                    "y": -62.427730560302737
+                },
+                "nextCommand": {
+                    "id": 1
+                },
+                "distance": 1.0
+            }
+        },
+        "00000003": {
+            "type": {
+                "class": "RotateRight",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentProgram": {
+                    "id": 4
+                },
+                "connectedNode": {
+                    "instanceID": -56012
+                },
+                "connectedNodePosition": {
+                    "x": -211.87863159179688,
+                    "y": 84.77845001220703
+                },
+                "nextCommand": {
+                    "id": 1
+                },
+                "amountToRotate": 90.0
+            }
+        },
+        "00000004": {
+            "type": {
+                "class": "Program",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentComputer": {
+                    "instanceID": 24064
+                },
+                "name": "Roomba",
+                "commands": [
+                    {
+                        "id": 0
+                    },
+                    {
+                        "id": 1
+                    },
+                    {
+                        "id": 2
+                    },
+                    {
+                        "id": 3
+                    }
+                ]
+            }
+        },
+        "00000005": {
+            "type": {
+                "class": "Terminus",
+                "ns": "UnityEngine.DMAT",
+                "asm": "FAKE_ASM"
+            },
+            "data": {}
+        }
+    }
+}

@@ -75,7 +75,12 @@ public class Sensors : ComputerModule
         List<Collider2D> colliders;
 
         colliders = new List<Collider2D>();
-        colliders.AddRange(Physics2D.OverlapBoxAll(transform.position + transform.right, new Vector2(.95f, .95f), transform.localEulerAngles.z));
+        var rays = Physics2D.RaycastAll(transform.position + (transform.right * 0.5f), transform.right, 0.5f);
+        foreach (var item in rays)
+        {
+            colliders.Add(item.collider);
+        }
+        //colliders.AddRange(Physics2D.OverlapBoxAll(transform.position + transform.right, new Vector2(.9f, .9f), transform.localEulerAngles.z));
 
         List<GameObject> objects = new List<GameObject>();
         foreach (var collider in colliders)
@@ -112,8 +117,9 @@ public class Sensors : ComputerModule
         Handles.color = new Color(1f, 0.2f, 0.2f, 0.2f);
         Vector3 startDir = new Vector3(Mathf.Cos(((visionAngle / 2) + transform.eulerAngles.z) * Mathf.Deg2Rad), Mathf.Sin(((visionAngle / 2) + transform.eulerAngles.z) * Mathf.Deg2Rad), 0);
         Handles.DrawSolidArc(transform.position, -Vector3.forward, startDir, visionAngle, visionDistance);
-        Handles.color = new Color(0, 0, 0, 0.2f);
-        Handles.DrawWireCube(transform.position + transform.right, new Vector2(.95f, .95f));
+
+        Handles.color = new Color(0, 0, 0, 1f);
+        Handles.DrawLine(transform.position + (transform.right * 0.5f), (transform.position + (transform.right * 0.5f)) + transform.right * 0.5f);
     }
 #endif
 }
