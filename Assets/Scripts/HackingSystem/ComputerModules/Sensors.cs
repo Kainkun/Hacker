@@ -13,7 +13,7 @@ public class Sensors : ComputerModule
     public IEnumerator LookForTag(string tag, System.Action<bool> callback, bool onlyInfront = false) //look for objects with tag for the duration of the command, uses a callback to return a value
     {
         float time = 0;
-        while (time < parentComputer.tickTime)
+        while (time < parentComputer.tickTime - 0.05f)
         {
             if (onlyInfront && LookForObjectWithTag(tag, true))
             {
@@ -42,7 +42,7 @@ public class Sensors : ComputerModule
 
         foreach (var item in objects)
         {
-            if (item.tag == tag)
+            if (item.tag.ToLower() == tag.ToLower())
             {
                 return true;
             }

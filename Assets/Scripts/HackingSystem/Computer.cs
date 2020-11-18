@@ -15,6 +15,7 @@ public class Computer : MonoBehaviour
     public Movement movement;
     [HideInInspector]
     public Sensors sensors;
+    public GameObject ps_explosion;
 
     private void Awake()
     {
@@ -62,6 +63,16 @@ public class Computer : MonoBehaviour
         // {
         //     AddProgram(TxtToProgram("DefaultProgram.txt"));
         // }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        var rb = other.gameObject.GetComponent<Rigidbody2D>();
+        if (!rb || (rb && rb.isKinematic) || other.gameObject.GetComponent<Computer>())
+        {
+            Destroy(Instantiate(ps_explosion, transform.position, Quaternion.identity), 0.5f);
+            Destroy(gameObject);
+        }
     }
 
 

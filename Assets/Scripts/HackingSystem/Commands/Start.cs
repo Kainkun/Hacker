@@ -8,6 +8,6 @@ public class Start : Next
 
     public override void Activate()
     {
-        Debug.Log("Start");
+        //Debug.Log("Start");
     }
 }

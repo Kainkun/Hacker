@@ -15,6 +15,9 @@ public class Player : MonoBehaviour
     {
         instance = this;
         rb = GetComponent<Rigidbody2D>();
+        
+        if(!GameObject.FindObjectOfType<HackingUISystem>())
+            HackingUICanvas = Instantiate(HackingUICanvas);
     }
 
     void Start()
