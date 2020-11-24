@@ -27,10 +27,11 @@ public class Movement : ComputerModule
         Vector2 startPos = transform.position;
         while (time < parentComputer.tickTime)
         {
-            transform.position = Vector2.Lerp(startPos, position, time / parentComputer.tickTime);
+            parentComputer.rb.position = Vector2.Lerp(startPos, position, time / parentComputer.tickTime);
             time += Time.deltaTime;
             yield return null;
         }
+        parentComputer.rb.position = position;
         //snap
         transform.position = kMath.SnapVector2(transform.position);
 
@@ -39,19 +40,17 @@ public class Movement : ComputerModule
     IEnumerator RotateLerp(float rotation) //Completes movement within tick time
     {
         float time = 0;
-        Quaternion startRotation = transform.localRotation;
-        Quaternion endRotation = startRotation;
-        Vector3 endEuler = endRotation.eulerAngles;
-        endEuler.z -= rotation;
-        endRotation = Quaternion.Euler(endEuler);
+        float startRotation = parentComputer.rb.rotation;
+        float endRotation = startRotation - rotation;
 
 
         while (time < parentComputer.tickTime)
         {
-            transform.localRotation = Quaternion.Lerp(startRotation, endRotation, time / parentComputer.tickTime);
+            parentComputer.rb.SetRotation(Mathf.Lerp(startRotation, endRotation, time / parentComputer.tickTime));
             time += Time.deltaTime;
             yield return null;
         }
+        parentComputer.rb.SetRotation(endRotation);
         //snap
         Vector3 angle = transform.localEulerAngles;
         angle.z = Mathf.Round(angle.z / 90) * 90;

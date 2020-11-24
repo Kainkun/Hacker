@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public float hackingRange = 2;
     public static Player instance;
     Rigidbody2D rb;
     public float moveSpeed = 1;
@@ -77,7 +78,7 @@ public class Player : MonoBehaviour
         foreach (var computer in computers)
         {
             var dist = Vector3.Distance(transform.position, computer.transform.position);
-            if (dist < 2 && dist < shortest)
+            if (dist < hackingRange && dist < shortest)
             {
                 closestComputer = computer;
                 shortest = dist;

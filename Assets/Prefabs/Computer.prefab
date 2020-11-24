@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 2114201208546118916}
   - component: {fileID: 2114201208546118917}
   - component: {fileID: 2114201208546118970}
+  - component: {fileID: 9185124531868950890}
   m_Layer: 0
   m_Name: Computer
   m_TagString: Untagged
@@ -223,8 +224,9 @@ MonoBehaviour:
   RunProgramOnStart: 0
   preloadedPrograms: []
   programs: []
-  movement: {fileID: 0}
-  sensors: {fileID: 0}
+  movementModule: {fileID: 0}
+  sensorsModule: {fileID: 0}
+  interactionModule: {fileID: 0}
   ps_explosion: {fileID: 293766837578941442, guid: 964b1ac98ec6314428d1ae248bb38138, type: 3}
   references:
     version: 1
@@ -253,6 +255,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 437477f29c6770946851b04fddb75e7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentComputer: {fileID: 0}
+--- !u!114 &9185124531868950890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2114201208546118971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cf4187e5e57fcd4aa521f2a683b72cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   parentComputer: {fileID: 0}

@@ -39,6 +39,13 @@ public class Sensors : ComputerModule
         else
             objects = ObjectsInfront();
 
+        if (tag == "") //if no tag
+        {
+            if (objects.Count == 0)
+                return true;
+            else
+                return false;
+        }
 
         foreach (var item in objects)
         {
@@ -114,7 +121,7 @@ public class Sensors : ComputerModule
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
-        Handles.color = new Color(1f, 0.2f, 0.2f, 0.2f);
+        Handles.color = new Color(1f, 0.2f, 0.2f, 0.05f);
         Vector3 startDir = new Vector3(Mathf.Cos(((visionAngle / 2) + transform.eulerAngles.z) * Mathf.Deg2Rad), Mathf.Sin(((visionAngle / 2) + transform.eulerAngles.z) * Mathf.Deg2Rad), 0);
         Handles.DrawSolidArc(transform.position, -Vector3.forward, startDir, visionAngle, visionDistance);
 

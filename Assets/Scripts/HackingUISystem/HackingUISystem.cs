@@ -26,6 +26,7 @@ public class HackingUISystem : MonoBehaviour
     public GameObject RotateRightNode;
     public GameObject RotateLeftNode;
     public GameObject IfInfrontNode;
+    public GameObject PickupDropNode;
 
     private void Awake()
     {
@@ -189,6 +190,8 @@ public class HackingUISystem : MonoBehaviour
             return RotateLeftNode;
         else if (command is IfInfront)
             return IfInfrontNode;
+        else if (command is PickupDrop)
+            return PickupDropNode;
 
         return null;
     }

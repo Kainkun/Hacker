@@ -17,7 +17,7 @@ public class RotateRight : Rotate
 
     public override void Activate()
     {
-        parentProgram.parentComputer.movement.RotateRight(amountToRotate);
+        parentProgram.parentComputer.movementModule.RotateRight(amountToRotate);
     }
 }
 
@@ -29,6 +29,6 @@ public class RotateLeft : Rotate
     }
     public override void Activate()
     {
-        parentProgram.parentComputer.movement.RotateLeft(amountToRotate);
+        parentProgram.parentComputer.movementModule.RotateLeft(amountToRotate);
     }
 }

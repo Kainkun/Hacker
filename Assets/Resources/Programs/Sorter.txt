@@ -1,0 +1,862 @@
+{
+    "parentComputer": {
+        "instanceID": -1288
+    },
+    "name": "Sorter",
+    "commands": [
+        {
+            "id": 0
+        },
+        {
+            "id": 1
+        },
+        {
+            "id": 2
+        },
+        {
+            "id": 3
+        },
+        {
+            "id": 4
+        },
+        {
+            "id": 5
+        },
+        {
+            "id": 6
+        },
+        {
+            "id": 7
+        },
+        {
+            "id": 8
+        },
+        {
+            "id": 9
+        },
+        {
+            "id": 10
+        },
+        {
+            "id": 11
+        },
+        {
+            "id": 12
+        },
+        {
+            "id": 13
+        },
+        {
+            "id": 14
+        },
+        {
+            "id": 15
+        },
+        {
+            "id": 16
+        },
+        {
+            "id": 17
+        },
+        {
+            "id": 18
+        },
+        {
+            "id": 19
+        },
+        {
+            "id": 20
+        },
+        {
+            "id": 21
+        },
+        {
+            "id": 22
+        },
+        {
+            "id": 23
+        },
+        {
+            "id": 24
+        },
+        {
+            "id": 25
+        },
+        {
+            "id": 26
+        }
+    ],
+    "references": {
+        "version": 1,
+        "00000000": {
+            "type": {
+                "class": "Start",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentProgram": {
+                    "id": 27
+                },
+                "connectedNode": {
+                    "instanceID": -122212
+                },
+                "connectedNodePosition": {
+                    "x": 20.0,
+                    "y": 15.0
+                },
+                "nextCommand": {
+                    "id": 1
+                }
+            }
+        },
+        "00000001": {
+            "type": {
+                "class": "IfInfront",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentProgram": {
+                    "id": 27
+                },
+                "connectedNode": {
+                    "instanceID": -122242
+                },
+                "connectedNodePosition": {
+                    "x": -230.87628173828126,
+                    "y": 68.52637481689453
+                },
+                "nextCommand": {
+                    "id": 4
+                },
+                "ifTrue": {
+                    "id": 10
+                },
+                "ifFalse": {
+                    "id": 4
+                },
+                "tag": "Red"
+            }
+        },
+        "00000002": {
+            "type": {
+                "class": "IfInfront",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentProgram": {
+                    "id": 27
+                },
+                "connectedNode": {
+                    "instanceID": -122352
+                },
+                "connectedNodePosition": {
+                    "x": -15.472984313964844,
+                    "y": 120.19405364990235
+                },
+                "nextCommand": {
+                    "id": 22
+                },
+                "ifTrue": {
+                    "id": 22
+                },
+                "ifFalse": {
+                    "id": 21
+                },
+                "tag": "Wall"
+            }
+        },
+        "00000003": {
+            "type": {
+                "class": "PickupDrop",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentProgram": {
+                    "id": 27
+                },
+                "connectedNode": {
+                    "instanceID": -122462
+                },
+                "connectedNodePosition": {
+                    "x": 256.6919860839844,
+                    "y": 151.48574829101563
+                },
+                "nextCommand": {
+                    "id": 11
+                }
+            }
+        },
+        "00000004": {
+            "type": {
+                "class": "IfInfront",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentProgram": {
+                    "id": 27
+                },
+                "connectedNode": {
+                    "instanceID": -122502
+                },
+                "connectedNodePosition": {
+                    "x": -230.87628173828126,
+                    "y": 17.586400985717775
+                },
+                "nextCommand": {
+                    "id": 17
+                },
+                "ifTrue": {
+                    "id": 12
+                },
+                "ifFalse": {
+                    "id": 17
+                },
+                "tag": "Green"
+            }
+        },
+        "00000005": {
+            "type": {
+                "class": "IfInfront",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentProgram": {
+                    "id": 27
+                },
+                "connectedNode": {
+                    "instanceID": -122612
+                },
+                "connectedNodePosition": {
+                    "x": -24.205551147460939,
+                    "y": -53.72954559326172
+                },
+                "nextCommand": {
+                    "id": 9
+                },
+                "ifTrue": {
+                    "id": 9
+                },
+                "ifFalse": {
+                    "id": 1
+                },
+                "tag": "Wall"
+            }
+        },
+        "00000006": {
+            "type": {
+                "class": "MoveRight",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentProgram": {
+                    "id": 27
+                },
+                "connectedNode": {
+                    "instanceID": -122722
+                },
+                "connectedNodePosition": {
+                    "x": -23.47783660888672,
+                    "y": -142.51060485839845
+                },
+                "nextCommand": {
+                    "id": 18
+                },
+                "distance": 1.0
+            }
+        },
+        "00000007": {
+            "type": {
+                "class": "MoveRight",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentProgram": {
+                    "id": 27
+                },
+                "connectedNode": {
+                    "instanceID": -122762
+                },
+                "connectedNodePosition": {
+                    "x": -114.44208526611328,
+                    "y": -141.78289794921876
+                },
+                "nextCommand": {
+                    "id": 6
+                },
+                "distance": 1.0
+            }
+        },
+        "00000008": {
+            "type": {
+                "class": "MoveRight",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentProgram": {
+                    "id": 27
+                },
+                "connectedNode": {
+                    "instanceID": -122802
+                },
+                "connectedNodePosition": {
+                    "x": -204.6785888671875,
+                    "y": -141.05517578125
+                },
+                "nextCommand": {
+                    "id": 7
+                },
+                "distance": 1.0
+            }
+        },
+        "00000009": {
+            "type": {
+                "class": "MoveRight",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentProgram": {
+                    "id": 27
+                },
+                "connectedNode": {
+                    "instanceID": -122842
+                },
+                "connectedNodePosition": {
+                    "x": -295.642822265625,
+                    "y": -138.1443328857422
+                },
+                "nextCommand": {
+                    "id": 8
+                },
+                "distance": 1.0
+            }
+        },
+        "0000000A": {
+            "type": {
+                "class": "PickupDrop",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentProgram": {
+                    "id": 27
+                },
+                "connectedNode": {
+                    "instanceID": -122882
+                },
+                "connectedNodePosition": {
+                    "x": -155.19406127929688,
+                    "y": 105.63977813720703
+                },
+                "nextCommand": {
+                    "id": 2
+                }
+            }
+        },
+        "0000000B": {
+            "type": {
+                "class": "RotateLeft",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentProgram": {
+                    "id": 27
+                },
+                "connectedNode": {
+                    "instanceID": -122922
+                },
+                "connectedNodePosition": {
+                    "x": 131.5252227783203,
+                    "y": 185.68829345703126
+                },
+                "nextCommand": {
+                    "id": 1
+                },
+                "amountToRotate": 90.0
+            }
+        },
+        "0000000C": {
+            "type": {
+                "class": "PickupDrop",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentProgram": {
+                    "id": 27
+                },
+                "connectedNode": {
+                    "instanceID": -122962
+                },
+                "connectedNodePosition": {
+                    "x": -127.54093170166016,
+                    "y": 5.215267181396484
+                },
+                "nextCommand": {
+                    "id": 13
+                }
+            }
+        },
+        "0000000D": {
+            "type": {
+                "class": "IfInfront",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentProgram": {
+                    "id": 27
+                },
+                "connectedNode": {
+                    "instanceID": -123002
+                },
+                "connectedNodePosition": {
+                    "x": -3.8295650482177736,
+                    "y": 30.68526268005371
+                },
+                "nextCommand": {
+                    "id": 14
+                },
+                "ifTrue": {
+                    "id": 14
+                },
+                "ifFalse": {
+                    "id": 23
+                },
+                "tag": "Wall"
+            }
+        },
+        "0000000E": {
+            "type": {
+                "class": "MoveBack",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentProgram": {
+                    "id": 27
+                },
+                "connectedNode": {
+                    "instanceID": -123112
+                },
+                "connectedNodePosition": {
+                    "x": 90.77325439453125,
+                    "y": 36.50697326660156
+                },
+                "nextCommand": {
+                    "id": 24
+                },
+                "distance": 1.0
+            }
+        },
+        "0000000F": {
+            "type": {
+                "class": "PickupDrop",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentProgram": {
+                    "id": 27
+                },
+                "connectedNode": {
+                    "instanceID": -123152
+                },
+                "connectedNodePosition": {
+                    "x": 261.7859802246094,
+                    "y": 4.487553119659424
+                },
+                "nextCommand": {
+                    "id": 16
+                }
+            }
+        },
+        "00000010": {
+            "type": {
+                "class": "MoveLeft",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentProgram": {
+                    "id": 27
+                },
+                "connectedNode": {
+                    "instanceID": -123192
+                },
+                "connectedNodePosition": {
+                    "x": 263.9691162109375,
+                    "y": -47.9078369140625
+                },
+                "nextCommand": {
+                    "id": 11
+                },
+                "distance": 1.0
+            }
+        },
+        "00000011": {
+            "type": {
+                "class": "MoveLeft",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentProgram": {
+                    "id": 27
+                },
+                "connectedNode": {
+                    "instanceID": -123232
+                },
+                "connectedNodePosition": {
+                    "x": -159.56033325195313,
+                    "y": -42.08612823486328
+                },
+                "nextCommand": {
+                    "id": 5
+                },
+                "distance": 1.0
+            }
+        },
+        "00000012": {
+            "type": {
+                "class": "MoveRight",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentProgram": {
+                    "id": 27
+                },
+                "connectedNode": {
+                    "instanceID": -123272
+                },
+                "connectedNodePosition": {
+                    "x": 68.94184112548828,
+                    "y": -146.87689208984376
+                },
+                "nextCommand": {
+                    "id": 19
+                },
+                "distance": 1.0
+            }
+        },
+        "00000013": {
+            "type": {
+                "class": "MoveRight",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentProgram": {
+                    "id": 27
+                },
+                "connectedNode": {
+                    "instanceID": -123312
+                },
+                "connectedNodePosition": {
+                    "x": 163.5446319580078,
+                    "y": -148.3323211669922
+                },
+                "nextCommand": {
+                    "id": 20
+                },
+                "distance": 1.0
+            }
+        },
+        "00000014": {
+            "type": {
+                "class": "MoveRight",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentProgram": {
+                    "id": 27
+                },
+                "connectedNode": {
+                    "instanceID": -123352
+                },
+                "connectedNodePosition": {
+                    "x": 238.4991455078125,
+                    "y": -100.30323028564453
+                },
+                "nextCommand": {
+                    "id": 1
+                },
+                "distance": 1.0
+            }
+        },
+        "00000015": {
+            "type": {
+                "class": "MoveRight",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentProgram": {
+                    "id": 27
+                },
+                "connectedNode": {
+                    "instanceID": -123392
+                },
+                "connectedNodePosition": {
+                    "x": 84.95154571533203,
+                    "y": 83.08065032958985
+                },
+                "nextCommand": {
+                    "id": 2
+                },
+                "distance": 1.0
+            }
+        },
+        "00000016": {
+            "type": {
+                "class": "RotateRight",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentProgram": {
+                    "id": 27
+                },
+                "connectedNode": {
+                    "instanceID": -123432
+                },
+                "connectedNodePosition": {
+                    "x": 77.67440795898438,
+                    "y": 122.377197265625
+                },
+                "nextCommand": {
+                    "id": 25
+                },
+                "amountToRotate": 90.0
+            }
+        },
+        "00000017": {
+            "type": {
+                "class": "MoveRight",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentProgram": {
+                    "id": 27
+                },
+                "connectedNode": {
+                    "instanceID": -123472
+                },
+                "connectedNodePosition": {
+                    "x": 102.41667175292969,
+                    "y": -8.61129379272461
+                },
+                "nextCommand": {
+                    "id": 13
+                },
+                "distance": 1.0
+            }
+        },
+        "00000018": {
+            "type": {
+                "class": "RotateRight",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentProgram": {
+                    "id": 27
+                },
+                "connectedNode": {
+                    "instanceID": -123512
+                },
+                "connectedNodePosition": {
+                    "x": 172.27719116210938,
+                    "y": 46.69496536254883
+                },
+                "nextCommand": {
+                    "id": 26
+                },
+                "amountToRotate": 90.0
+            }
+        },
+        "00000019": {
+            "type": {
+                "class": "IfInfront",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentProgram": {
+                    "id": 27
+                },
+                "connectedNode": {
+                    "instanceID": -123868
+                },
+                "connectedNodePosition": {
+                    "x": 175.18804931640626,
+                    "y": 120.92176818847656
+                },
+                "nextCommand": {
+                    "id": 28
+                },
+                "ifTrue": {
+                    "id": 3
+                },
+                "ifFalse": {
+                    "id": 25
+                },
+                "tag": ""
+            }
+        },
+        "0000001A": {
+            "type": {
+                "class": "IfInfront",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentProgram": {
+                    "id": 27
+                },
+                "connectedNode": {
+                    "instanceID": -124040
+                },
+                "connectedNodePosition": {
+                    "x": 263.9691162109375,
+                    "y": 61.24924087524414
+                },
+                "nextCommand": {
+                    "id": 28
+                },
+                "ifTrue": {
+                    "id": 15
+                },
+                "ifFalse": {
+                    "id": 26
+                },
+                "tag": ""
+            }
+        },
+        "0000001B": {
+            "type": {
+                "class": "Program",
+                "ns": "",
+                "asm": "Assembly-CSharp"
+            },
+            "data": {
+                "parentComputer": {
+                    "instanceID": -1288
+                },
+                "name": "Sorter",
+                "commands": [
+                    {
+                        "id": 0
+                    },
+                    {
+                        "id": 1
+                    },
+                    {
+                        "id": 2
+                    },
+                    {
+                        "id": 3
+                    },
+                    {
+                        "id": 4
+                    },
+                    {
+                        "id": 5
+                    },
+                    {
+                        "id": 6
+                    },
+                    {
+                        "id": 7
+                    },
+                    {
+                        "id": 8
+                    },
+                    {
+                        "id": 9
+                    },
+                    {
+                        "id": 10
+                    },
+                    {
+                        "id": 11
+                    },
+                    {
+                        "id": 12
+                    },
+                    {
+                        "id": 13
+                    },
+                    {
+                        "id": 14
+                    },
+                    {
+                        "id": 15
+                    },
+                    {
+                        "id": 16
+                    },
+                    {
+                        "id": 17
+                    },
+                    {
+                        "id": 18
+                    },
+                    {
+                        "id": 19
+                    },
+                    {
+                        "id": 20
+                    },
+                    {
+                        "id": 21
+                    },
+                    {
+                        "id": 22
+                    },
+                    {
+                        "id": 23
+                    },
+                    {
+                        "id": 24
+                    },
+                    {
+                        "id": 25
+                    },
+                    {
+                        "id": 26
+                    }
+                ]
+            }
+        },
+        "0000001C": {
+            "type": {
+                "class": "",
+                "ns": "",
+                "asm": ""
+            },
+            "data": {}
+        },
+        "0000001D": {
+            "type": {
+                "class": "Terminus",
+                "ns": "UnityEngine.DMAT",
+                "asm": "FAKE_ASM"
+            },
+            "data": {}
+        }
+    }
+}

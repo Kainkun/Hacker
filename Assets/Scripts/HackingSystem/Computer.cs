@@ -12,24 +12,30 @@ public class Computer : MonoBehaviour
 
     //Modules
     [HideInInspector]
-    public Movement movement;
+    public Movement movementModule;
     [HideInInspector]
-    public Sensors sensors;
+    public Sensors sensorsModule;
+    [HideInInspector]
+    public Interaction interactionModule;
     public GameObject ps_explosion;
+    public Rigidbody2D rb;
 
     private void Awake()
     {
         AddModules();
         LoadPreloadedPrograms();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void AddModules()
     {
-        movement = GetComponent<Movement>();
-        sensors = GetComponent<Sensors>();
+        movementModule = GetComponent<Movement>();
+        sensorsModule = GetComponent<Sensors>();
+        interactionModule = GetComponent<Interaction>();
 
-        movement?.SetParentComputer(this);
-        sensors?.SetParentComputer(this);
+        movementModule?.SetParentComputer(this);
+        sensorsModule?.SetParentComputer(this);
+        interactionModule?.SetParentComputer(this);
     }
 
     void LoadPreloadedPrograms()

@@ -42,7 +42,7 @@ public class MoveForward : MoveDirection
 
     public override void Activate()
     {
-        parentProgram.parentComputer.movement.MoveForward(distance);
+        parentProgram.parentComputer.movementModule.MoveForward(distance);
     }
 
     public override void SetDistance(float dist)
@@ -61,7 +61,7 @@ public class MoveBack : MoveDirection
 
     public override void Activate()
     {
-        parentProgram.parentComputer.movement.MoveBackwards(distance);
+        parentProgram.parentComputer.movementModule.MoveBackwards(distance);
     }
 
     public override void SetDistance(float dist)
@@ -79,7 +79,7 @@ public class MoveLeft : MoveDirection
 
     public override void Activate()
     {
-        parentProgram.parentComputer.movement.MoveLeft(distance);
+        parentProgram.parentComputer.movementModule.MoveLeft(distance);
     }
 
     public override void SetDistance(float dist)
@@ -96,7 +96,7 @@ public class MoveRight : MoveDirection
 
     public override void Activate()
     {
-        parentProgram.parentComputer.movement.MoveRight(distance);
+        parentProgram.parentComputer.movementModule.MoveRight(distance);
     }
 
     public override void SetDistance(float dist)

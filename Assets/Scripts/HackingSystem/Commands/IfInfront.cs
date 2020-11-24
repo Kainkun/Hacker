@@ -20,6 +20,6 @@ public class IfInfront : If
 
     public override void Activate()
     {
-        parentProgram.parentComputer.sensors.StartCoroutine(parentProgram.parentComputer.sensors.LookForTag(tag, retval => { if (retval) nextCommand = ifTrue; else nextCommand = ifFalse; }, true)); //use of callback to return a value
+        parentProgram.parentComputer.sensorsModule.StartCoroutine(parentProgram.parentComputer.sensorsModule.LookForTag(tag, retval => { if (retval) nextCommand = ifTrue; else nextCommand = ifFalse; }, true)); //use of callback to return a value
     }
 }
